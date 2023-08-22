@@ -7,7 +7,15 @@ import { useSelector } from 'react-redux'
 
 // import useAuth from './hooks/useAuth'
 import { selectCurrentToken } from './redux/features/auth/authSlice'
+
 import Homepage from './pages/Homepage'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import ForgotPassword from './pages/ForgotPassword'
+import SetNewPassword from './pages/SetNewPassword'
+import PersistLogin from './redux/features/auth/PersistLogin'
+import Prefetch from './redux/features/auth/Prefetch'
+import EmailVerification from './pages/EmailVerfication'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -32,6 +40,24 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Homepage />} />
+
+        <Route path="login" element={<Login />} />
+
+        <Route path="/signup" element={<Register />} />
+
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        <Route path="/set-password/:token" element={<SetNewPassword />} />
+
+        <Route element={<PersistLogin />}>
+
+          <Route element={<Prefetch />}>
+
+            <Route path="/email-verification" element={<EmailVerification />} />
+
+          </Route>
+
+        </Route>
 
       </Routes>
       {/* <Routes>
