@@ -59,7 +59,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const { accessToken } = await signup({ data }).unwrap()
+      const { accessToken } = await signup({ firstName: data.firstName, lastName: data.lastName, email: data.email, phoneNumber: data.phoneNumber, branch: data.branch, password: data.password }).unwrap()
 
       dispatch(setCredentials({ accessToken }))
 
