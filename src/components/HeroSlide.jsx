@@ -12,7 +12,7 @@ const HeroSlide = ({ subTitle, mainTitle, description }) => {
         <h2 className="hero-section__textbox--main-title">{mainTitle}</h2>
         <p className="hero-section__textbox--description">{description}</p>
         {/* <Link to="/">register</Link> */}
-        <Link to="/register" className="hero-section__textbox--link">
+        <Link to="/signup" className="hero-section__textbox--link">
           register
         </Link>
       </div>

@@ -33,7 +33,7 @@ const About = () => {
             beatae, quas reprehenderit a! Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Quae, velit!
           </p>
-          <Link to="/register" className="about__cta">
+          <Link to="/signup" className="about__cta">
             get started
           </Link>
         </div>
