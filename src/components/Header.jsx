@@ -2,8 +2,13 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { selectCurrentToken } from "../redux/features/auth/authSlice";
 
 const Header = () => {
+  const isLoggedIn = useSelector((state) => selectCurrentToken(state));
+
   const navRef = useRef(null);
   // true means we show the normal hamburger icon on the ui and false means we show the close icon on the ui
   const [icon, setIcon] = useState(true);
@@ -34,12 +39,20 @@ const Header = () => {
             <li className="header__nav-item">
               <a href="/#courses">ELDT Courses</a>
             </li>
-            <li className="header__nav-item">
-              <Link to="/login">Login</Link>
-            </li>
-            <li className="header__nav-item header__nav-item-bg">
-              <Link to="/signup">Register</Link>
-            </li>
+            {isLoggedIn ? (
+              <li className="header__nav-item">
+                <a href="#">Welcome!</a>
+              </li>
+            ) : (
+              <>
+                <li className="header__nav-item">
+                  <Link to="/login">Login</Link>
+                </li>
+                <li className="header__nav-item header__nav-item-bg">
+                  <Link to="/signup">Register</Link>
+                </li>
+              </>
+            )}
           </ol>
         </nav>
         <button className="menu-btn" onClick={handleToggleNav}>
