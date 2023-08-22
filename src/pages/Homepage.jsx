@@ -1,8 +1,8 @@
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import About from "../components/About";
-import Courses from "../components/Courses";
 import Footer from "../components/Footer";
+import CoursesList from "../redux/features/course/CoursesList";
 
 const Homepage = () => {
   return (
@@ -10,7 +10,7 @@ const Homepage = () => {
       <Header />
       <Hero />
       <About />
-      <Courses />
+      <CoursesList />
       <Footer />
     </>
   )
