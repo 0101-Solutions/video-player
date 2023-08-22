@@ -16,7 +16,7 @@ import SetNewPassword from './redux/features/auth/SetNewPassword'
 import PersistLogin from './redux/features/auth/PersistLogin'
 import Prefetch from './redux/features/auth/Prefetch'
 import EmailVerification from './redux/features/auth/EmailVerfication'
-import Cart from './redux/features/cart/Cart.JSX'
+import Cart from './redux/features/cart/Cart'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
