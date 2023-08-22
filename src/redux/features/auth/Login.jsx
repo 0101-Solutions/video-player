@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from 'react'
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { ToastNotification, showErrorToast, showSuccessToast } from '../components/Toast';
+import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
+import { ToastNotification, showErrorToast, showSuccessToast } from '../../../components/Toast';
 
-import usePersist from '../hooks/usePersist'
+import usePersist from '../../../hooks/usePersist'
 
-import { useLoginMutation } from '../redux/features/auth/authApiSlice'
-import { setCredentials } from '../redux/features/auth/authSlice'
+import { useLoginMutation } from './authApiSlice'
+import { setCredentials } from './authSlice'
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
@@ -29,6 +28,8 @@ const Login = () => {
   const [login, { isSuccess }] = useLoginMutation();
 
   const [persist, setPersist] = usePersist();
+
+  const handleToggle = () => setPersist(prev => !prev)
 
   useEffect(() => {
     userRef.current?.focus();
@@ -59,7 +60,7 @@ const Login = () => {
 
       dispatch(setCredentials({ accessToken }))
 
-      navigate('/email-verification')
+      navigate('/cart')
     } catch (err) {
       if (!err.status) {
         setErrorMsg('No Server Response');
@@ -135,9 +136,10 @@ const Login = () => {
             <input
               type="checkbox"
               id="persist"
+              name="persist"
               className="form__group--checkbox"
               checked={persist}
-              onChange={(e) => setPersist(e.target.checked)}
+              onChange={handleToggle}
             />
           </div>
           <button className="form__button">Login</button>

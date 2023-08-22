@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { ToastNotification, showErrorToast, showSuccessToast } from '../components/Toast';
-import trailer from "../assets/Images/trailer.jpg";
+import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
+import { ToastNotification, showErrorToast, showSuccessToast } from '../../../components/Toast';
+import trailer from "../../../assets/Images/trailer.jpg";
 
-import usePersist from '../hooks/usePersist'
+import usePersist from '../../../hooks/usePersist'
 
-import { useRegisterMutation } from '../redux/features/auth/authApiSlice'
-import { setCredentials } from '../redux/features/auth/authSlice'
+import { useRegisterMutation } from './authApiSlice'
+import { setCredentials } from './authSlice'
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
