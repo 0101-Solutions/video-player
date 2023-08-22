@@ -7,6 +7,7 @@ import { selectCurrentToken } from "../redux/features/auth/authSlice";
 
 const PayButton = ({ cartItems }) => {
   const isLoggedIn = useSelector((state) => selectCurrentToken(state));
+
   const handleCheckout = () => {
     axios
       .post(`${url}/stripe/checkout-session`, {
