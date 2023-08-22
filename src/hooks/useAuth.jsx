@@ -6,8 +6,6 @@ const useAuth = () => {
   const token = useSelector(selectCurrentToken);
 
   let isAdmin = false;
-  let isHeadOfDepartment = false;
-  let isTeacher = false;
 
   let status = "";
 
@@ -15,27 +13,17 @@ const useAuth = () => {
 
     const decodedToken = jwtDecode(token);
 
-    const { username, email, roles } = decodedToken.UserInfo;
+    const { firstName, lastName, email, roles } = decodedToken.UserInfo;
 
     isAdmin = roles.includes("admin" || "Admin");
-    isHeadOfDepartment = roles.includes("headofdepartment" || "HeadOfDepartment");
-    isTeacher = !isAdmin && !isHeadOfDepartment; // truthy
 
     if (isAdmin) {
       status = "Admin";
     }
 
-    if (isHeadOfDepartment) {
-      status = "Head of Department";
-    }
-
-    if (isTeacher) {
-      status = "Teacher";
-    }
-
-    return { username, roles, email, status, isAdmin, isHeadOfDepartment, isTeacher };
+    return { firstName, lastName, roles, email, status, isAdmin };
   }
-  return { username: "", roles: [], email: "", status, isAdmin, isHeadOfDepartment, isTeacher };
+  return { firstName: "", lastName: "", roles: [], email: "", status, isAdmin };
 };
 
 export default useAuth;
