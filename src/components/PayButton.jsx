@@ -2,8 +2,9 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import propTypes from 'prop-types';
 
-import { url } from "../redux/api/apiSlice";
 import { selectCurrentToken } from "../redux/features/auth/authSlice";
+
+const url = "https://cdlcity-api.azurewebsites.net/api/v1"
 
 const PayButton = ({ cartItems }) => {
   const isLoggedIn = useSelector((state) => selectCurrentToken(state));
