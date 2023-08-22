@@ -1,17 +1,19 @@
 import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 
-// import { store } from '../../store';
+import { coursesApiSlice } from '../course/courseApiSlice';
+
+import { store } from '../../store';
 
 const Prefetch = () => {
   useEffect(() => {
     // Manually subscribing to the endpoints
-    // const circulars = store.dispatch(circularApiSlice.endpoints.getCirculars.initiate())
+    const courses = store.dispatch(coursesApiSlice.endpoints.getCourses.initiate());
 
 
     return () => {
       // Manually unsubscribing from the endpoints. Clean up
-      // circlars.unsubscribe()
+      courses.unsubscribe();
     }
   }, [])
 
