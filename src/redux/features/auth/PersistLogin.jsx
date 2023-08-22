@@ -1,7 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import process from 'process'
 
 import { useRefreshMutation } from "./authApiSlice"
 import { selectCurrentToken } from "./authSlice"
@@ -33,7 +32,7 @@ const PersistLogin = () => {
 
   useEffect(() => {
 
-    if (effectRan.current === true || process.env.NODE_ENV !== 'development') { // React 18 Strict Mode
+    if (effectRan.current === true) { // React 18 Strict Mode
 
       const verifyRefreshToken = async () => {
         try {
