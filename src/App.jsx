@@ -9,13 +9,14 @@ import { useSelector } from 'react-redux'
 import { selectCurrentToken } from './redux/features/auth/authSlice'
 
 import Homepage from './pages/Homepage'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import ForgotPassword from './pages/ForgotPassword'
-import SetNewPassword from './pages/SetNewPassword'
+import Login from './redux/features/auth/Login'
+import Register from './redux/features/auth/Register'
+import ForgotPassword from './redux/features/auth/ForgotPassword'
+import SetNewPassword from './redux/features/auth/SetNewPassword'
 import PersistLogin from './redux/features/auth/PersistLogin'
 import Prefetch from './redux/features/auth/Prefetch'
-import EmailVerification from './pages/EmailVerfication'
+import EmailVerification from './redux/features/auth/EmailVerfication'
+import Cart from './redux/features/cart/cART.JSX'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -23,10 +24,11 @@ function App() {
   // const { isAdmin } = useAuth();
 
   const isLoggedIn = useSelector((state) => selectCurrentToken(state))
+  console.log(isLoggedIn)
 
   useEffect(() => {
     if (isLoggedIn) {
-      isAuthenticated && redirect('/admin/dashboard')
+      isAuthenticated && redirect('/cart')
       setIsAuthenticated(true)
     }
 
@@ -39,21 +41,22 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route element={<Prefetch />}>
+          <Route path="/" element={<Homepage />} />
 
-        <Route path="login" element={<Login />} />
+          <Route path="login" element={<Login />} />
 
-        <Route path="/signup" element={<Register />} />
+          <Route path="/signup" element={<Register />} />
 
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        <Route path="/set-password/:token" element={<SetNewPassword />} />
+          <Route path="/set-password/:token" element={<SetNewPassword />} />
 
-        <Route element={<PersistLogin />}>
+          <Route path="/email-verification" element={<EmailVerification />} />
 
-          <Route element={<Prefetch />}>
+          <Route element={<PersistLogin />}>
 
-            <Route path="/email-verification" element={<EmailVerification />} />
+            <Route path="/cart" element={<Cart />} />
 
           </Route>
 
