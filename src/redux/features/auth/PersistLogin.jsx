@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Link, Outlet, useNavigate } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
