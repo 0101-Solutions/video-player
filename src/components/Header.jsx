@@ -1,13 +1,27 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { selectCurrentToken } from "../redux/features/auth/authSlice";
+import { useSendLogoutMutation } from "../redux/features/auth/authApiSlice";
+
+import Loader from "./Loader";
+import { ToastNotification, showErrorToast, showSuccessToast } from "../components/Toast";
+
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const isLoggedIn = useSelector((state) => selectCurrentToken(state));
+
+  const [sendLogout, {
+    isLoading,
+    isError,
+    isSuccess,
+    error,
+  }] = useSendLogoutMutation();
 
   const navRef = useRef(null);
   // true means we show the normal hamburger icon on the ui and false means we show the close icon on the ui
@@ -22,8 +36,26 @@ const Header = () => {
     }
   };
 
+  const handleLogout = async () => {
+    sendLogout();
+
+    window.location.href = '/login'
+  };
+
+  useEffect(() => {
+
+    if (isSuccess) navigate("/login")
+
+  }, [isSuccess, navigate])
+
   return (
     <header className="header">
+      {isLoading && <Loader />}
+
+      {isSuccess && showSuccessToast("Logout Successful")}
+
+      {isError && showErrorToast(error?.data?.message)}
+
       <div className="header__nav-portion">
         <h2 className="header_text">CDL City Driving</h2>
         <nav className="header__nav" ref={navRef}>
@@ -32,16 +64,17 @@ const Header = () => {
               <Link to="/">Home</Link>
             </li>
             <li className="header__nav-item">
-              {/* <Link to="/#about">about</Link> */}
-              {/* <ScrollLink to="about" smooth={true} duration={500}>About</ScrollLink> */}
               <a href="/#about">About</a>
             </li>
             <li className="header__nav-item">
               <a href="/#courses">ELDT Courses</a>
             </li>
+            <li className="header__nav-item">
+              <Link to="/video-courses">My Course</Link>
+            </li>
             {isLoggedIn ? (
-              <li className="header__nav-item">
-                <a href="#">Welcome!</a>
+              <li className="header__nav-item header__nav-item-bg">
+                <a onClick={handleLogout}>Log Out!</a>
               </li>
             ) : (
               <>
@@ -59,6 +92,7 @@ const Header = () => {
           {icon ? <GiHamburgerMenu /> : <AiOutlineClose />}
         </button>
       </div>
+      <ToastNotification />
     </header>
   );
 };
