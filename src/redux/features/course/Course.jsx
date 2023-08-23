@@ -23,7 +23,7 @@ const Course = ({ courseId }) => {
     return (
       <div className="course">
         <div className="course__image">
-          <img src={course.previewUrl} alt="course image" className="course__image--img" />
+          <img alt="course image" className="course__image--img" />
         </div>
         <div className="course__details">
           <p className="course__details--title">{course.name}</p>
