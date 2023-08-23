@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 import CoursesList from "../redux/features/course/CoursesList";
 
-const HomePage = () => {
+const Homepage = () => {
   return (
     <>
       <Header />
@@ -17,4 +17,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default Homepage

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate, redirect } from "react-router-dom"
 
-import HomePage from './pages/HomePage'
+import Homepage from './pages/Homepage'
 import PageNotFound from './components/404Page'
 import Login from './redux/features/auth/Login'
 import Register from './redux/features/auth/Register'
@@ -44,7 +44,7 @@ function App() {
 
           <Route path="/" element={<Layout />}>
 
-            <Route index element={<HomePage />} />
+            <Route index element={<Homepage />} />
 
             {!isAuthenticated
               ? <Route index element={<Login />} />
