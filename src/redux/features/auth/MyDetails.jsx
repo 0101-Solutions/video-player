@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { store } from "../../store";
 
-import { selectUser, useMyProfileQuery } from './authApiSlice';
+import { selectUser } from './authApiSlice';
 
 import { useUpdateUserMutation } from '../users/usersApiSlice';
 
@@ -17,7 +17,7 @@ const MyDetails = () => {
 
     const user = data
 
-    const [updateUser, { isLoading, isError, error }] = useUpdateUserMutation("me");
+    const [updateUser, { isLoading, isError }] = useUpdateUserMutation("me");
 
     const navigate = useNavigate();
 
@@ -207,7 +207,7 @@ const MyDetails = () => {
                                     />
                                 </div>
                                 <div className="col-lg-6 col-12 form-group mg-t-30">
-                                    <label className="text-dark-medium">Upload Teacher's Photo (150px X 150px)*</label>
+                                    <label className="text-dark-medium">Upload Photo (150px X 150px)*</label>
                                     <input
                                         type="file"
                                         className="form-control-file"
