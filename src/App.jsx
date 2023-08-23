@@ -1,34 +1,33 @@
 import { useState, useEffect } from 'react'
-
-import { Route, Routes, redirect } from "react-router-dom"
-
-// import { Routes, Route, Navigate, redirect } from "react-router-dom"
 import { useSelector } from 'react-redux'
+import { Routes, Route, Navigate, redirect } from "react-router-dom"
 
-// import useAuth from './hooks/useAuth'
-import { selectCurrentToken } from './redux/features/auth/authSlice'
-
-import Homepage from './pages/Homepage'
+import HomePage from './pages/HomePage'
+import PageNotFound from './components/404Page'
 import Login from './redux/features/auth/Login'
 import Register from './redux/features/auth/Register'
 import ForgotPassword from './redux/features/auth/ForgotPassword'
-import SetNewPassword from './redux/features/auth/SetNewPassword'
-import PersistLogin from './redux/features/auth/PersistLogin'
+// import SetNewPassword from './redux/features/auth/SetNewPassword'
 import Prefetch from './redux/features/auth/Prefetch'
-import EmailVerification from './redux/features/auth/EmailVerfication'
+// import EmailVerification from './redux/features/auth/EmailVerfication'
 import Cart from './redux/features/cart/Cart'
+import VideoPlayer from './pages/VideoPlayerPage'
+import PaymentSuccessfulPage from './pages/PaymentSuccessfulPage'
+import Layout from './components/Layout'
+import PersistLogin from './redux/features/auth/PersistLogin'
+import RequireAuth from './redux/features/auth/RequireAuth'
+
+import { selectCurrentToken } from './redux/features/auth/authSlice'
+
 
 function App() {
+
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  // const { isAdmin } = useAuth();
-
   const isLoggedIn = useSelector((state) => selectCurrentToken(state))
-  console.log(isLoggedIn)
 
   useEffect(() => {
     if (isLoggedIn) {
-      isAuthenticated && redirect('/cart')
       setIsAuthenticated(true)
     }
 
@@ -36,68 +35,67 @@ function App() {
       redirect('/login')
       setIsAuthenticated(false)
     }
-  }, [isAuthenticated, isLoggedIn]);
+  }, [isLoggedIn]);
 
   return (
     <>
-      <Routes>
-        <Route element={<Prefetch />}>
-          <Route path="/" element={<Homepage />} />
+      <div id="wrapper" className='wrapper bg-ash'>
+        <Routes>
 
-          <Route path="login" element={<Login />} />
+          <Route path="/" element={<Layout />}>
 
-          <Route path="/signup" element={<Register />} />
+            <Route index element={<HomePage />} />
 
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+            {!isAuthenticated
+              ? <Route index element={<Login />} />
+              : <Route path="/" element={<Navigate replace to="/" />} />
+            }
 
-          <Route path="/set-password/:token" element={<SetNewPassword />} />
+            {!isAuthenticated
+              ? <Route path="login" element={<Login />} />
+              : <Route path="login" element={<Navigate replace to="/" />} />
+            }
 
-          <Route path="/email-verification" element={<EmailVerification />} />
+            {!isAuthenticated
+              ? <Route path="forgot-password" element={<ForgotPassword />} />
+              : <Route path="forgot-password" element={<Navigate replace to="/" />} />
+            }
 
-          <Route element={<PersistLogin />}>
+            {!isAuthenticated
+              ? <Route path="signup" element={<Register />} />
+              : <Route path="/" element={<Navigate replace to="/" />} />
+            }
 
-            <Route path="/cart" element={<Cart />} />
+            <Route element={<PersistLogin />}>
+
+              {/* Admin Dashboard Routes */}
+              <Route element={<Prefetch />}>
+
+                <Route element={<RequireAuth />}>
+
+                  <Route path="cart" element={<Cart />} />
+
+                  <Route path="checkout/success" element={<PaymentSuccessfulPage />} />
+
+                  <Route path="video-courses" element={<VideoPlayer />} />
+
+                  <Route path="*" element={<RequireAuth />} />
+
+                </Route>
+
+              </Route>
+
+            </Route>
+
 
           </Route>
 
-        </Route>
+          <Route path="*" element={<PageNotFound message={"Page not found"} />} />
 
-      </Routes>
-      {/* <Routes>
+        </Routes>
 
-        <Route path="/" element={<Layout />}>
-
-          {!isAuthenticated
-            ? <Route index element={<Login />} />
-            : <Route path="/" element={<Navigate replace to="/admin/dashboard" />} />
-          }
-
-          {!isAuthenticated
-            ? <Route path="login" element={<Login />} />
-            : <Route path="login" element={<Navigate replace to="/admin/dashboard" />} />
-          }
-
-          {!isAuthenticated
-            ? <Route path="login" element={<Register />} />
-            : <Route path="login" element={<Navigate replace to="/admin/dashboard" />} />
-          }
-
-          {!isAuthenticated
-            ? <Route path="forgot-password" element={<ForgotPassword />} />
-            : <Route path="forgot-password" element={<Navigate replace to="/admin/dashboard" />} />
-          } */}
-
-      {/* Admin Dashboard Routes */}
-
-      { /* End Admin Dashboard Routes */}
-
-      {/* Catch all "*" routes */}
-      {/* <Route path="*" element={<PageNotFound message={"Page not found"} />} />
-
-        </Route>
-      </Routes> */}
+      </div >
     </>
-
   )
 }
 
