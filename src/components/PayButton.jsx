@@ -14,6 +14,7 @@ const PayButton = ({ cartItems }) => {
       .post(`${url}/stripe/checkout-session`, {
         cartItems,
         isLoggedIn,
+        withCredentials: true
       })
       .then((response) => {
         if (response.data.url) {
