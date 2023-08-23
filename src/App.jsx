@@ -42,7 +42,7 @@ function App() {
       <div id="wrapper" className='wrapper bg-ash'>
         <Routes>
 
-          <Route path="/" element={<Layout />}>
+          <Route path="/*" element={<Layout />}>
 
             <Route index element={<Homepage />} />
 
