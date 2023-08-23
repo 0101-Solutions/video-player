@@ -42,27 +42,27 @@ function App() {
       <div id="wrapper" className='wrapper bg-ash'>
         <Routes>
 
-          <Route path="/*" element={<Layout />}>
+          <Route path="/" element={<Layout />}>
 
             <Route index element={<Homepage />} />
 
             {!isAuthenticated
-              ? <Route index element={<Login />} />
+              ? <Route path="/login" element={<Login />} />
               : <Route path="/" element={<Navigate replace to="/" />} />
             }
 
             {!isAuthenticated
-              ? <Route path="login" element={<Login />} />
-              : <Route path="login" element={<Navigate replace to="/" />} />
+              ? <Route path="/login" element={<Login />} />
+              : <Route path="/login" element={<Navigate replace to="/" />} />
             }
 
             {!isAuthenticated
-              ? <Route path="forgot-password" element={<ForgotPassword />} />
-              : <Route path="forgot-password" element={<Navigate replace to="/" />} />
+              ? <Route path="/forgot-password" element={<ForgotPassword />} />
+              : <Route path="/forgot-password" element={<Navigate replace to="/" />} />
             }
 
             {!isAuthenticated
-              ? <Route path="signup" element={<Register />} />
+              ? <Route path="/signup" element={<Register />} />
               : <Route path="/" element={<Navigate replace to="/" />} />
             }
 
@@ -73,11 +73,11 @@ function App() {
 
                 <Route element={<RequireAuth />}>
 
-                  <Route path="cart" element={<Cart />} />
+                  <Route path="/cart" element={<Cart />} />
 
-                  <Route path="checkout/success" element={<PaymentSuccessfulPage />} />
+                  <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
 
-                  <Route path="video-courses" element={<VideoPlayer />} />
+                  <Route path="/video-courses" element={<VideoPlayer />} />
 
                   <Route path="*" element={<RequireAuth />} />
 
