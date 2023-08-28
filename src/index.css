@@ -1339,3 +1339,492 @@ body {
 .payment-successful p {
   font-size: 1.5rem;
 }
+.download-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2196f3; /* Blue */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.download-link:hover {
+  background-color: #0b7dda;
+}
+/* VideoCompletion.css */
+
+.video-completion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.video-player {
+  margin-bottom: 20px;
+}
+
+.certificate-link {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.certificate-link:hover {
+  background-color: #45a049;
+}
+
+/* CookieConsentComponent.css */
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+
+.cookie-consent p {
+  margin: 0 10px 0 0;
+}
+
+.cookie-consent button {
+  background-color: #fde428;
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  border-radius: 3px;
+}
+
+.cookie-consent button:last-child {
+  background-color: #333;
+  color: #fff;
+  margin-left: 10px;
+}
+
+/* Eldt content style */
+.content {
+  padding: 20px;
+}
+
+.items-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.item {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  color: var(--color-primary);
+  margin-top: 0;
+}
+
+.list {
+  list-style: disc;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.list li {
+  margin-bottom: 10px;
+}
+
+/* page not found */
+/* Add this to your CSS */
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.animated-text {
+  text-align: center;
+}
+
+.not-found-title {
+  font-size: 5rem;
+  margin: 0;
+  color: #e91e63; /* Pink */
+}
+
+.not-found-message {
+  font-size: 1.5rem;
+  margin: 20px 0;
+  color: #333;
+}
+
+.home-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #388e3c;
+}
+/* Server error css */
+.server-error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.server-error-title {
+  font-size: 5rem;
+  margin: 0;
+  color: #e91e63; /* Pink */
+}
+
+.server-error-message {
+  font-size: 1.5rem;
+  margin: 20px 0;
+  color: #333;
+  text-align: center;
+}
+
+.gears {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.gear {
+  position: relative;
+  z-index: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #333; /* Black */
+  transform-origin: center center; /* Set the transform origin */
+}
+
+.gear:before {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  z-index: 2;
+  content: "";
+  border-radius: 50%;
+  background: #eaeaea; /* Light Gray */
+}
+
+.gear .bar {
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  z-index: 0;
+  width: 150px;
+  height: 30px;
+  margin-top: -15px;
+  border-radius: 5px;
+  background: #333; /* Black */
+}
+
+/* Add keyframes animation here for gear rotation */
+@keyframes gearRotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Apply the gear rotation animation to the gears */
+.gear:nth-child(1) {
+  animation: gearRotation 3s linear infinite;
+}
+
+.gear:nth-child(2) {
+  animation: gearRotation 3s linear infinite reverse;
+}
+
+.gear:nth-child(3) {
+  animation: gearRotation 3s linear infinite;
+}
+
+/* Add additional bars to each gear */
+.gear .bar:nth-child(1) {
+  transform: rotate(0deg);
+}
+.gear .bar:nth-child(2) {
+  transform: rotate(90deg);
+}
+.gear .bar:nth-child(3) {
+  transform: rotate(180deg);
+}
+.gear .bar:nth-child(4) {
+  transform: rotate(270deg);
+}
+
+/* bad request CSS */
+/* Add this to your CSS */
+.bad-request-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.bad-request-title {
+  font-size: 5rem;
+  margin: 0;
+  color: #ff5722; /* Orange */
+}
+
+.bad-request-message {
+  font-size: 1.5rem;
+  margin: 20px 0;
+  color: #333;
+  text-align: center;
+}
+
+/* unauthorized css */
+/* Add this to your CSS */
+.unauthorized-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.emoji-container {
+  display: flex;
+}
+
+.emoji {
+  font-size: 2.7rem;
+  margin: 0.5rem;
+}
+
+.unauthorized-title {
+  font-size: 3.4rem;
+  margin: 0;
+  color: #e91e63; /* Pink */
+}
+
+.unauthorized-message {
+  font-size: 2.5rem;
+  margin: 20px 0;
+  color: #333;
+  text-align: center;
+}
+
+.error-code {
+  font-size: 2rem;
+  margin-top: 10px;
+  color: #333;
+}
+
+/* certifcate competion page and component */
+.certificate-page {
+  text-align: center;
+  padding: 50px;
+}
+
+.certificate-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.certificate-text {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.download-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2196f3; /* Blue */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.download-link:hover {
+  background-color: #0b7dda;
+}
+/* VideoCompletion.css */
+
+.video-completion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.video-player {
+  margin-bottom: 20px;
+}
+
+.certificate-link {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.certificate-link:hover {
+  background-color: #45a049;
+}
+
+/* CookieConsentComponent.css */
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+
+.cookie-consent p {
+  margin: 0 10px 0 0;
+}
+
+.cookie-consent button {
+  background-color: #fde428;
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  border-radius: 3px;
+}
+
+.cookie-consent button:last-child {
+  background-color: #333;
+  color: #fff;
+  margin-left: 10px;
+}
+
+/* Courses.css */
+.courses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.course-card {
+  border: 1px solid var(--color-black-default);
+  padding: 1rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-white);
+  width: calc(33.33% - 2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.course-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.course-title {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  color: var(--color-black-default);
+}
+
+.course-description {
+  color: var(--color-black-default);
+  opacity: 0.8;
+  flex-grow: 1;
+}
+
+.course-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.course-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart {
+  background-color: var(--color-primary);
+}
+
+.watch-now {
+  background-color: var(--color-primary-light);
+}
+
+@media (max-width: 768px) {
+  .course-card {
+    width: calc(50% - 2rem);
+  }
+}
+
