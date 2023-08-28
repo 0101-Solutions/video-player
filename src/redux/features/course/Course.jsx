@@ -5,10 +5,40 @@ import { addToCart } from "../../features/cart/cartSlice";
 
 import { selectCourseById } from "../../features/course/courseApiSlice";
 
+import { useGetMyOrdersQuery } from "../order/orderApiSlice";
+
 // eslint-disable-next-line react/prop-types
 const Course = ({ courseId }) => {
 
+  const { data: orders } = useGetMyOrdersQuery();
+
+  // const getCourseIds = orders => orders?.data?.map(order => order.courses?.filter(course => course._id !== order._id)?.flatMap(course => course._id));
+
+  const getCourseIds = orders => {
+    if (!orders?.data) {
+      return [];
+    }
+
+    const courseIds = [];
+
+    for (const order of orders.data) {
+      if (order.courses) {
+        for (const course of order.courses) {
+          if (course.course && course.course._id) {
+            courseIds.push(course.course._id);
+          }
+        }
+      }
+    }
+    return courseIds;
+  }
+
+  const courseIds = getCourseIds(orders);
+
   const course = useSelector(state => selectCourseById(state, courseId));
+
+  // Filter courses where it should return filteredCourses
+  const filteredCourseIds = courseIds?.filter(id => id === courseId);
 
   const dispatch = useDispatch();
 
@@ -18,6 +48,9 @@ const Course = ({ courseId }) => {
     dispatch(addToCart(course));
     navigate("/cart");
   };
+
+  console.log("THE COURSE ID", courseId);
+  console.log("MY COURSE ID", courseIds);
 
   if (course) {
     return (
@@ -37,8 +70,14 @@ const Course = ({ courseId }) => {
             </p>
           </div>
           <div className="course__actions">
-            <button className="course__actions--button" onClick={() => handleAddToCart(course)}>Add to cart</button>
-            <button className="course__actions--button" onClick={() => navigate("/cart")}>Check Cart</button>
+            {filteredCourseIds == null || Object.keys(filteredCourseIds)?.length === 0 ? (
+              <>
+                <button className="course__actions--button" onClick={() => handleAddToCart(course)}>Add to cart</button>
+                <button className="course__actions--button" onClick={() => navigate("/cart")}>Check Cart</button>
+              </>
+            ) : (
+              <button className="course__actions--button" onClick={() => navigate("/dashboard/video-courses")}>Watch Now</button>
+            )}
           </div>
         </div>
         <p className="course__price">
