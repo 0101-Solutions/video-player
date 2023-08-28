@@ -19,6 +19,7 @@ import RequireAuth from './redux/features/auth/RequireAuth'
 
 import { selectCurrentToken } from './redux/features/auth/authSlice'
 import CoursesList from './redux/features/course/CoursesList'
+import CookieConsentComponent from './components/CookieConsent'
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <>
+      <CookieConsentComponent />
       <div id="wrapper" className='wrapper bg-ash'>
         <Routes>
           <Route element={<Prefetch />}>
