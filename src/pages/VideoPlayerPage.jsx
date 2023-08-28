@@ -1,56 +1,89 @@
 import { useRef } from 'react'
-import axios from 'axios';
 import ReactPlayer from 'react-player'
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+// import { useParams } from 'react-router-dom';
 
 import Header from '../components/Header';
 import CourseDetails from '../redux/features/course/CourseDetails';
-import { selectCurrentToken } from '../redux/features/auth/authSlice';
-
-const url = "http://localhost:3080/api/v1"
+import { useCompleteCourseMutation, useGetMyCoursesQuery } from '../redux/features/course/courseApiSlice';
+import Loader from '../components/Loader';
+import { ToastNotification, showErrorToast, showSuccessToast } from "../components/Toast";
 
 const VideoPlayer = () => {
-  const isLoggedIn = useSelector((state) => selectCurrentToken(state));
+  const {
+    data: courses,
+    isLoading: isLoadingCourses,
+    isSuccess: isSuccessCourses,
+    isError: isErrorCourses,
+    error: errorCourses
+  } = useGetMyCoursesQuery();
 
+  const [completeCourse, {
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  }] = useCompleteCourseMutation();
+
+  // Map through the courses and get the course from the array.data
+  const courseObj = courses?.data?.map((course) => course);
 
   const playerRef = useRef(null);
 
-  // Create a function that sends some json to video-progress endpoint
-  const handleOnStart = () => {
-    console.log("video is playing")
-  }
-
-  const handleOnSeek = () => {
-    playerRef.current?.seekTo(1, 'seconds');
-  }
-
   const handleOnEnded = () => {
+    showSuccessToast("Congratulations! You have completed this course.");
+    completeCourse();
+    // navigate("/certificate");
+  };
 
-    axios.post(`${url}/video-progress`, {
-      isLoggedIn,
-    });
+  let content;
+
+  if (isLoading || isLoadingCourses) {
+    content = <Loader />
   }
 
-  return (
+  if (isSuccessCourses || isSuccess) {
+    content = (
+      <>
+        <Header />
+
+        {(isError || isErrorCourses) && showErrorToast(error?.message) || showErrorToast(errorCourses?.message)}
+
+        {/* Map through each course */}
+        {courseObj?.map((course) =>
+        (
+          <>
+            <div className='player-wrapper' key={course?.course?._id}>
+              <ReactPlayer
+                key={course?.course?._id}
+                ref={playerRef}
+                className='react-player'
+                controls={true}
+                url={course?.course?.videoUrl}
+                width='100%'
+                height='80%'
+                onEnded={handleOnEnded}
+              />
+            </div>
+            <br />
+            <CourseDetails name={course?.course?.name} description={course?.course?.description} img={course?.course?.previewUrl} />
+          </>
+        ))}
+        <ToastNotification />
+      </>
+    )
+  } else {
     <>
       <Header />
+      {(isError || isErrorCourses) && showErrorToast(error?.message) || showErrorToast(errorCourses?.message)}
       <div className='player-wrapper'>
-        <ReactPlayer
-          ref={playerRef}
-          className='react-player'
-          controls={true}
-          url='https://vimeo.com/446818432'
-          width='100%'
-          height='100%'
-          onStart={handleOnStart}
-          onSeek={handleOnSeek}
-          onEnded={handleOnEnded}
-        />
+        <p>The course you are looking for does not exist please try again later.</p>
+        <ToastNotification />
       </div>
-      <br />
-      <CourseDetails />
     </>
-  )
+  }
+
+  return content;
 }
 
 export default VideoPlayer
