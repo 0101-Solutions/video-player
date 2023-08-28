@@ -461,6 +461,7 @@ body {
   color: var(--color-white);
   font-weight: bold;
   text-transform: uppercase;
+  margin-bottom: 3rem;
 }
 
 .hero-section__textbox--main-title {
@@ -468,13 +469,15 @@ body {
   text-transform: uppercase;
   text-align: center;
   color: var(--color-primary);
+  margin-bottom: 5rem;
 }
 
 .hero-section__textbox--description {
-  text-align: center;
+  text-align: justify;
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 2rem;
+  font-size: larger;
 }
 
 .hero-section__textbox--link {
