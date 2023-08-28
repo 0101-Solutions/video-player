@@ -28,6 +28,20 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
         } else return [{ type: 'Course', id: 'LIST' }]
       }
     }),
+    getMyCourses: builder.query({
+      query: () => "/courses/my-course",
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
+      providesTags: (result) => {
+        if (result?.ids) {
+          return [
+            { type: 'Course', id: 'LIST' },
+            ...result.ids.map((id) => ({ type: 'Course', id }))
+          ]
+        } else return [{ type: 'Course', id: 'LIST' }]
+      }
+    }),
     addNewCourse: builder.mutation({
       query: initialCourseData => ({
         url: '/courses',
@@ -61,14 +75,22 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
         { type: 'Course', id: arg.id },
       ]
     }),
+    completeCourse: builder.mutation({
+      query: () => ({
+        url: `/courses/complete`,
+        method: 'PATCH',
+      }),
+    })
   }),
 });
 
 export const {
   useGetCoursesQuery,
+  useGetMyCoursesQuery,
   useAddNewCourseMutation,
   useUpdateCourseMutation,
-  useDeleteCourseMutation
+  useDeleteCourseMutation,
+  useCompleteCourseMutation
 } = coursesApiSlice;
 
 // Selectors
