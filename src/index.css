@@ -306,6 +306,10 @@ body {
   background-color: var(--color-white);
 }
 
+.header_text {
+  margin-left: 2rem;
+}
+
 .header_contacts {
   display: flex;
   justify-content: space-around;
