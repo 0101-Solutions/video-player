@@ -18,6 +18,7 @@ import PersistLogin from './redux/features/auth/PersistLogin'
 import RequireAuth from './redux/features/auth/RequireAuth'
 
 import { selectCurrentToken } from './redux/features/auth/authSlice'
+import CoursesList from './redux/features/course/CoursesList'
 
 
 function App() {
@@ -41,43 +42,47 @@ function App() {
     <>
       <div id="wrapper" className='wrapper bg-ash'>
         <Routes>
+          <Route element={<Prefetch />}>
 
-          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Layout />}>
 
-            <Route index element={<Homepage />} />
+              <Route index element={<Homepage />} />
 
-            {!isAuthenticated
-              ? <Route path="/login" element={<Login />} />
-              : <Route path="/" element={<Navigate replace to="/" />} />
-            }
+              <Route path="/eldt-courses" element={<CoursesList />} />
 
-            {!isAuthenticated
-              ? <Route path="/login" element={<Login />} />
-              : <Route path="/login" element={<Navigate replace to="/" />} />
-            }
+              {!isAuthenticated
+                ? <Route path="/login" element={<Login />} />
+                : <Route path="/" element={<Navigate replace to="/dashboard" />} />
+              }
 
-            {!isAuthenticated
-              ? <Route path="/forgot-password" element={<ForgotPassword />} />
-              : <Route path="/forgot-password" element={<Navigate replace to="/" />} />
-            }
+              {!isAuthenticated
+                ? <Route path="/login" element={<Login />} />
+                : <Route path="/login" element={<Navigate replace to="/dashboard" />} />
+              }
 
-            {!isAuthenticated
-              ? <Route path="/signup" element={<Register />} />
-              : <Route path="/" element={<Navigate replace to="/" />} />
-            }
+              {!isAuthenticated
+                ? <Route path="/forgot-password" element={<ForgotPassword />} />
+                : <Route path="/forgot-password" element={<Navigate replace to="/dashboard" />} />
+              }
 
-            <Route element={<PersistLogin />}>
+              {!isAuthenticated
+                ? <Route path="/signup" element={<Register />} />
+                : <Route path="/signup" element={<Navigate replace to="/dashboard" />} />
+              }
 
-              {/* Admin Dashboard Routes */}
-              <Route element={<Prefetch />}>
+              <Route element={<PersistLogin />}>
 
                 <Route element={<RequireAuth />}>
+
+                  <Route path="/dashboard" element={<Homepage />} />
+
+                  <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
 
                   <Route path="/cart" element={<Cart />} />
 
                   <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
 
-                  <Route path="/video-courses" element={<VideoPlayer />} />
+                  <Route path="/dashboard/video-courses" element={<VideoPlayer />} />
 
                   <Route path="*" element={<RequireAuth />} />
 
