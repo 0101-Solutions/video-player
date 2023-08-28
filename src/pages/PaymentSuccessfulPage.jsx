@@ -13,7 +13,7 @@ const PaymentSuccessful = () => {
 
   // Redirect after staying on page for 5 seconds
   setTimeout(() => {
-    window.location.href = "/video-courses";
+    window.location.href = "/dashboard/eldt-courses";
   }, 5000);
 
   return (
@@ -27,7 +27,6 @@ const PaymentSuccessful = () => {
         </p>
       </div>
       <ToastNotification />
-
     </div>
   );
 };
