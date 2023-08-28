@@ -4,6 +4,9 @@ import Loader from '../../../components/Loader';
 import { ToastNotification, showErrorToast } from '../../../components/Toast';
 import Course from './Course';
 import Title from "../../../components/Title";
+import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
+// import { useGetMyOrdersQuery } from "../order/orderApiSlice";
 
 const CoursesList = () => {
 
@@ -26,6 +29,7 @@ const CoursesList = () => {
 
     content = (
       <>
+        <Header />
         <section className="courses" id="courses">
           <Title
             subTitle="we have a variety of courses to make you drive your dream car"
@@ -33,6 +37,7 @@ const CoursesList = () => {
           />
           {ids.map((id) => (<Course key={id} courseId={id} />))}
         </section>
+        <Footer />
       </>
     );
   }
