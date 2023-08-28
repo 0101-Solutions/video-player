@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import propTypes from 'prop-types';
 
 import { selectCurrentToken } from "../redux/features/auth/authSlice";
+import { clearCart } from '../redux/features/cart/cartSlice';
 
 const url = "https://cdlcity-api.azurewebsites.net/api/v1"
 
@@ -22,6 +23,8 @@ const PayButton = ({ cartItems }) => {
         }
       })
       .catch((err) => console.log(err.message));
+
+    clearCart();
   };
 
   return (
