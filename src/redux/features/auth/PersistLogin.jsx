@@ -1,19 +1,25 @@
 /* eslint-disable no-undef */
-import { Link, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useRefreshMutation } from "./authApiSlice"
 import { selectCurrentToken } from "./authSlice"
+// import { ToastNotification, showErrorToast } from '../../../components/Toast';
 
 import usePersist from "../../../hooks/usePersist"
+import UnauthorizedPage from "../../../components/401Page"
 
 const PersistLogin = () => {
+    const [refresh, { isUninitialized, isSuccess, isError }] = useRefreshMutation()
+
     const [persist] = usePersist()
+
     const token = useSelector(selectCurrentToken)
+
     const effectRan = useRef(false)
+
     const [trueSuccess, setTrueSuccess] = useState(false)
-    const [refresh, { isUninitialized, isSuccess, isError, error }] = useRefreshMutation()
 
     useEffect(() => {
         if (effectRan.current === true || process.env.NODE_ENV !== 'development') {
@@ -35,10 +41,7 @@ const PersistLogin = () => {
         return <Outlet />
     } else if (isError) {
         return (
-            <div className="my-4 text-xs text-red-500 text-center tracking-wide">
-                {`${error?.data?.message} - `}
-                <Link to="/login">Please login again</Link>
-            </div>
+            <UnauthorizedPage />
         )
     } else if (isSuccess && trueSuccess) {
         return <Outlet />
