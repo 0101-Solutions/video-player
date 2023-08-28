@@ -359,6 +359,7 @@ body {
   text-transform: capitalize;
   font-weight: bold;
   color: var(--color-primary);
+  cursor: pointer;
 }
 
 .header__nav-item:hover {
