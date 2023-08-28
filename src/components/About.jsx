@@ -1,8 +1,26 @@
 import Title from "./Title";
 import image from "../assets/Images/trailer.jpg";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../redux/features/auth/authSlice";
+import { useEffect, useState } from "react";
 
 const About = () => {
+  const isLoggedIn = useSelector((state) => selectCurrentToken(state))
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      setIsAuthenticated(true)
+    }
+
+    if (!isLoggedIn) {
+      redirect('/login')
+      setIsAuthenticated(false)
+    }
+  }, [isLoggedIn]);
+
   return (
     <section className="about" id="about">
       <Title
@@ -33,9 +51,15 @@ const About = () => {
             beatae, quas reprehenderit a! Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Quae, velit!
           </p>
-          <Link to="/signup" className="about__cta">
-            get started
-          </Link>
+          {isAuthenticated ? (
+            <Link to="/eldt-courses" className="about__cta">
+              See Our Courses
+            </Link>
+          ) : (
+            <Link to="/signup" className="about__cta">
+              get started
+            </Link>
+          )}
         </div>
       </div>
     </section>
