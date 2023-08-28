@@ -47,10 +47,10 @@ const Login = () => {
       x.type = "password";
     }
 
-    if (y.innerHTML === "Show Password") {
-      y.innerHTML = "Hide Password";
+    if (y.innerHTML === "Hide") {
+      y.innerHTML = "Show";
     } else {
-      y.innerHTML = "Show Password";
+      y.innerHTML = "Hide";
     }
   }
 
@@ -60,7 +60,7 @@ const Login = () => {
 
       dispatch(setCredentials({ accessToken }))
 
-      navigate('/cart')
+      navigate('/eldt-courses')
     } catch (err) {
       if (!err.status) {
         setErrorMsg('No Server Response');
@@ -81,7 +81,7 @@ const Login = () => {
         <meta name="description" content="Login - CDL City Driving School App" />
         <meta name="keyword" content="CDL City Driving School" />
         <meta property="og:title" content="CDL City Driving School App" />
-        <link rel="canonical" href="https://eldttrucking.com" />
+        <link rel="canonical" href="https://www.eldttrucking.com" />
       </Helmet>
       <div className="login">
         <Header />
@@ -125,7 +125,7 @@ const Login = () => {
                 className="show-password-button"
                 onClick={showPassword}
               >
-                {showPassword ? "Hide" : "Show"}
+                {showPassword ? "Show" : "Hide"}
               </button>
             </div>
           </div>
