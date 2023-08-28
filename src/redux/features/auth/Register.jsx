@@ -66,7 +66,7 @@ const Register = () => {
       // TO-DO: Check if user has verified their email.
       // If so, redirect to the dashboard else redirect to the email verification page.
 
-      navigate('/email-verification')
+      navigate('/dashboard')
     } catch (err) {
       if (!err.status) {
         setErrorMsg('No Server Response');
