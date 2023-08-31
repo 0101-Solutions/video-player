@@ -2,22 +2,30 @@ import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { coursesApiSlice } from '../course/courseApiSlice';
+import { ordersApiSlice } from '../order/ordersApiSlice';
+import { usersApiSlice } from '../users/usersApiSlice';
 
 import { store } from '../../store';
+import useAuth from '../../../hooks/useAuth';
 
 const Prefetch = () => {
+  const { isAdmin } = useAuth();
+
   useEffect(() => {
     // Manually subscribing to the endpoints
     const courses = store.dispatch(coursesApiSlice.endpoints.getCourses.initiate());
-    const myOrders = store.dispatch(coursesApiSlice.endpoints.getMyCourses.initiate());
-
+    // const myOrders = store.dispatch(ordersApiSlice.endpoints.getMyOrders.initiate());
+    const orders = store.dispatch(ordersApiSlice.endpoints.getOrders.initiate())
+    const users = store.dispatch(usersApiSlice.endpoints.getUsers.initiate())
 
     return () => {
       // Manually unsubscribing from the endpoints. Clean up
       courses.unsubscribe();
-      myOrders.unsubscribe();
+      // myOrders.unsubscribe();
+      orders.unsubscribe();
+      users.unsubscribe();
     }
-  }, [])
+  }, [isAdmin])
 
   return <Outlet />
 }
