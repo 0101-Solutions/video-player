@@ -7,13 +7,25 @@ const initialState = ordersAdapter.getInitialState();
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getMyOrders: builder.query({
-      query: () => "/orders/my-orders",
+    getOrders: builder.query({
+      query: () => "/orders",
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
-      providesTags: () => {
-        return [{ type: 'Order', id: 'LIST' }]
+      transformResponse: (responseData) => {
+        const loadedOrders = responseData.data.map((order) => {
+          order.id = order._id;
+          return order;
+        });
+        return ordersAdapter.setAll(initialState, loadedOrders);
+      },
+      providesTags: (result) => {
+        if (result?.ids) {
+          return [
+            { type: 'Order', id: 'LIST' },
+            ...result.ids.map((id) => ({ type: 'Order', id }))
+          ]
+        } else return [{ type: 'Order', id: 'LIST' }]
       }
     }),
     addNewOrder: builder.mutation({
@@ -26,6 +38,8 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [
         { type: 'Order', id: "LIST" },
+        { type: 'Class', id: 'LIST' },
+        { type: 'Dorm', id: 'LIST' }
       ]
     }),
     updateOrder: builder.mutation({
@@ -37,7 +51,9 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
         }
       }),
       invalidatesTags: (result, error, arg) => [
-        { type: 'Order', id: arg.id }
+        { type: 'Order', id: arg.id },
+        { type: 'Class', id: 'LIST' },
+        { type: 'Dorm', id: 'LIST' }
       ]
     }),
     deleteOrder: builder.mutation({
@@ -47,21 +63,38 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [
         { type: 'Order', id: arg.id },
+        { type: 'Class', id: 'LIST' },
+        { type: 'Dorm', id: 'LIST' }
       ]
+    }),
+    getMyOrders: builder.query({
+      query: () => "/orders/my-orders",
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
+      providesTags: (result) => {
+        if (result?.ids) {
+          return [
+            { type: 'MyOrder', id: 'LIST' },
+            ...result.ids.map((id) => ({ type: 'MyOrder', id }))
+          ]
+        } else return [{ type: 'MyOrder', id: 'LIST' }]
+      }
     }),
   }),
 });
 
 export const {
+  useGetOrdersQuery,
   useGetMyOrdersQuery,
   useAddNewOrderMutation,
   useUpdateOrderMutation,
-  useDeleteOrderMutation
+  useDeleteOrderMutation,
 } = ordersApiSlice;
 
 // Selectors
 
-export const selectOrdersResult = ordersApiSlice.endpoints.getMyOrders.select();
+export const selectOrdersResult = ordersApiSlice.endpoints.getOrders.select();
 
 // Creates memoized selector
 export const selectOrders = createSelector(
