@@ -14,7 +14,7 @@ import Cart from './redux/features/cart/Cart'
 import PaymentSuccessfulPage from './pages/PaymentSuccessfulPage'
 import Layout from './components/Layout'
 import PersistLogin from './redux/features/auth/PersistLogin'
-// import RequireAuth from './redux/features/auth/RequireAuth'
+import RequireAuth from './redux/features/auth/RequireAuth'
 
 import { selectCurrentToken } from './redux/features/auth/authSlice'
 import CoursesList from './redux/features/course/CoursesList'
@@ -35,6 +35,7 @@ import NewUserForm from './redux/features/users/NewUserForm'
 import OrdersList from './redux/features/order/OrdersList'
 import NewOrderForm from './redux/features/order/NewOrderForm'
 import EditOrder from './redux/features/order/EditOrder'
+import CompleteCoursePage from './pages/CompleteCoursePage'
 
 
 function App() {
@@ -112,51 +113,54 @@ function App() {
               }
 
               <Route element={<PersistLogin />}>
+                <Route element={<RequireAuth />}>
 
-                {/* User Routes */}
-                <Route path="/dashboard" element={<Homepage />} />
+                  {/* User Routes */}
+                  <Route path="/dashboard" element={<Homepage />} />
 
-                <Route path="/video-courses" element={<VideoPlayerFn />} />
+                  <Route path="/video-courses" element={<VideoPlayerFn />} />
 
-                <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
+                  <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
 
-                <Route path="/cart" element={<Cart />} />
+                  <Route path="/cart" element={<Cart />} />
 
-                <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
+                  <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
 
-                <Route path="/dashboard/video-courses" element={<VideoPlayerFn />} />
+                  <Route path="/dashboard/video-courses/:id" element={<VideoPlayerFn />} />
 
-                <Route path="*" element={<PageNotFound />} />
+                  <Route path="/dashboard/completed-course" element={<CompleteCoursePage />} />
 
-                {/* Admin Routes */}
-                {isAdmin && <Route path="/dashboard/admin">
-                  {<Route index element={<AdminHomePage />} />}
+                  <Route path="*" element={<PageNotFound />} />
 
-                  {<Route path="new-course" element={<NewCourseForm />} />}
+                  {/* Admin Routes */}
+                  {isAdmin && <Route path="/dashboard/admin">
+                    {<Route index element={<AdminHomePage />} />}
 
-                  {<Route path="courses" element={<AdminCourseList />} />}
+                    {<Route path="new-course" element={<NewCourseForm />} />}
 
-                  {<Route path="edit-course/:id" element={<EditCourse />} />}
+                    {<Route path="courses" element={<AdminCourseList />} />}
 
-                  {<Route path="users" element={<UsersList />} />}
+                    {<Route path="edit-course/:id" element={<EditCourse />} />}
 
-                  {<Route path="new-user" element={<NewUserForm />} />}
+                    {<Route path="users" element={<UsersList />} />}
 
-                  {<Route path="edit-user/:id" element={<EditUser />} />}
+                    {<Route path="new-user" element={<NewUserForm />} />}
 
-                  {<Route path="orders" element={<OrdersList />} />}
+                    {<Route path="edit-user/:id" element={<EditUser />} />}
 
-                  {<Route path="new-order" element={<NewOrderForm />} />}
+                    {<Route path="orders" element={<OrdersList />} />}
 
-                  {<Route path="edit-order/:id" element={<EditOrder />} />}
+                    {<Route path="new-order" element={<NewOrderForm />} />}
 
-                  {<Route path="*" element={<PageNotFound />} />}
-                </Route>}
+                    {<Route path="edit-order/:id" element={<EditOrder />} />}
 
+                    {<Route path="*" element={<PageNotFound />} />}
+                  </Route>}
+
+                </Route>
               </Route>
 
             </Route>
-
 
           </Route>
 
