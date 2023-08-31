@@ -18,7 +18,6 @@ const NewCourseForm = () => {
   }] = useAddNewCourseMutation();
 
   const onSubmit = (data) => {
-    showSuccessToast("Course Added Successfully")
     addNewCourse({ data })
     navigate('/dashboard/admin/courses')
   }
