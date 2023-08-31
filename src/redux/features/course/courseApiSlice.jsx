@@ -23,7 +23,7 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
         if (result?.ids) {
           return [
             { type: 'Courses', id: 'LIST' },
-            ...result.ids.map((id) => ({ type: 'Course', id }))
+            ...result.ids.map((id) => ({ type: 'Courses', id }))
           ]
         } else return [{ type: 'Course', id: 'LIST' }]
       }
