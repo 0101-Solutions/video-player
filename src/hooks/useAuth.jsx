@@ -15,11 +15,11 @@ const useAuth = () => {
 
     const { firstName, lastName, email, role } = decodedToken.UserInfo;
 
-    isAdmin = role == "admin" || "Admin";
-
-    if (isAdmin) {
-      status = "Admin";
+    if (role === "admin") {
+      isAdmin = true;
+      status = "admin";
     }
+
 
     return { firstName, lastName, role, email, status, isAdmin };
   }
