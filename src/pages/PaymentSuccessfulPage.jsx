@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import Header from "../components/Header";
 import { ToastNotification, showSuccessToast } from "../components/Toast";
+import { clearCart } from "../redux/features/cart/cartSlice";
 // import Footer from "../components/Footer";
 
 const PaymentSuccessful = () => {
@@ -13,12 +13,12 @@ const PaymentSuccessful = () => {
 
   // Redirect after staying on page for 5 seconds
   setTimeout(() => {
+    clearCart();
     window.location.href = "/dashboard/eldt-courses";
   }, 5000);
 
   return (
     <div className="payment-successful">
-      <Header />
       <div className="payment-successful-container">
         <h2>Payment Successful</h2>
         <p>
