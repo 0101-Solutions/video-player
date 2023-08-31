@@ -112,10 +112,7 @@ const Header = () => {
                   <Link to="/dashboard">Home</Link>
                 </li>
                 <li className="header__nav-item">
-                  <Link to="/dashboard/#about">About</Link>
-                </li>
-                <li className="header__nav-item">
-                  <Link to="/eldt-courses">ELDT Courses</Link>
+                  <Link to="/dashboard/eldt-courses">ELDT Courses</Link>
                 </li>
                 {isAuthenticated ? (
                   <li className="header__nav-item">
