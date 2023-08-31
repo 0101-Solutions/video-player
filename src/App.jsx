@@ -14,7 +14,7 @@ import Cart from './redux/features/cart/Cart'
 import PaymentSuccessfulPage from './pages/PaymentSuccessfulPage'
 import Layout from './components/Layout'
 import PersistLogin from './redux/features/auth/PersistLogin'
-import RequireAuth from './redux/features/auth/RequireAuth'
+// import RequireAuth from './redux/features/auth/RequireAuth'
 
 import { selectCurrentToken } from './redux/features/auth/authSlice'
 import CoursesList from './redux/features/course/CoursesList'
@@ -33,6 +33,8 @@ import EditUser from './redux/features/users/EditUser'
 import UsersList from './redux/features/users/UserList'
 import NewUserForm from './redux/features/users/NewUserForm'
 import OrdersList from './redux/features/order/OrdersList'
+import NewOrderForm from './redux/features/order/NewOrderForm'
+import EditOrder from './redux/features/order/EditOrder'
 
 
 function App() {
@@ -111,49 +113,45 @@ function App() {
 
               <Route element={<PersistLogin />}>
 
-                <Route element={<RequireAuth />}>
+                {/* User Routes */}
+                <Route path="/dashboard" element={<Homepage />} />
 
-                  {/* User Routes */}
-                  <Route path="/dashboard" element={<Homepage />} />
+                <Route path="/video-courses" element={<VideoPlayerFn />} />
 
-                  <Route path="/video-courses" element={<VideoPlayerFn />} />
+                <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
 
-                  <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
+                <Route path="/cart" element={<Cart />} />
 
-                  <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
 
-                  <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
+                <Route path="/dashboard/video-courses" element={<VideoPlayerFn />} />
 
-                  <Route path="/dashboard/video-courses" element={<VideoPlayerFn />} />
+                <Route path="*" element={<PageNotFound />} />
 
-                  <Route path="*" element={<PageNotFound />} />
+                {/* Admin Routes */}
+                {isAdmin && <Route path="/dashboard/admin">
+                  {<Route index element={<AdminHomePage />} />}
 
-                  {/* Admin Routes */}
-                  {isAdmin && <Route path="/dashboard/admin">
-                    {<Route index element={<AdminHomePage />} />}
+                  {<Route path="new-course" element={<NewCourseForm />} />}
 
-                    {<Route path="courses">
-                      {<Route element={<AdminCourseList />} />}
-                      {<Route path="new-course" element={<NewCourseForm />} />}
-                      {<Route path="edit-course/:id" element={<EditCourse />} />}
-                    </Route>}
+                  {<Route path="courses" element={<AdminCourseList />} />}
 
+                  {<Route path="edit-course/:id" element={<EditCourse />} />}
 
-                    {<Route path="users">
-                      {<Route element={<UsersList />} />}
-                      {<Route path="new-user" element={<NewUserForm />} />}
-                      {<Route path="edit-user/:id" element={<EditUser />} />}
-                    </Route>}
+                  {<Route path="users" element={<UsersList />} />}
 
-                    {<Route path="orders">
-                      {<Route element={<OrdersList />} />}
-                    </Route>}
+                  {<Route path="new-user" element={<NewUserForm />} />}
 
+                  {<Route path="edit-user/:id" element={<EditUser />} />}
 
-                    {<Route path="*" element={<PageNotFound />} />}
-                  </Route>}
+                  {<Route path="orders" element={<OrdersList />} />}
 
-                </Route>
+                  {<Route path="new-order" element={<NewOrderForm />} />}
+
+                  {<Route path="edit-order/:id" element={<EditOrder />} />}
+
+                  {<Route path="*" element={<PageNotFound />} />}
+                </Route>}
 
               </Route>
 
