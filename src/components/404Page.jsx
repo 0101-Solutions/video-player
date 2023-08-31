@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
+import useAuth from "../hooks/useAuth";
 
 const NotFoundPage = () => {
+  const { isAdmin } = useAuth();
+
   return (
     <div className="not-found-container">
       <div className="animated-text">
@@ -9,10 +11,15 @@ const NotFoundPage = () => {
         <p className="not-found-message">
           Oops! The page you are looking for does not exist.
         </p>
-        <Link to="/" className="home-button">
-          Go to Home Page
-        </Link>
-        <Footer />
+        {isAdmin ? (
+          <Link to="/dashboard/admin" className="home-button">
+            Head Over to Admin Dashboard
+          </Link>
+        ) : (
+          <Link to="/" className="home-button">
+            Go to Home Page
+          </Link>
+        )}
       </div>
     </div>
   );
