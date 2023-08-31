@@ -5,14 +5,12 @@ import { addToCart } from "../../features/cart/cartSlice";
 
 import { selectCourseById } from "../../features/course/courseApiSlice";
 
-import { useGetMyOrdersQuery } from "../order/orderApiSlice";
+import { useGetMyOrdersQuery } from "../order/ordersApiSlice";
 
 // eslint-disable-next-line react/prop-types
 const Course = ({ courseId }) => {
 
   const { data: orders } = useGetMyOrdersQuery();
-
-  // const getCourseIds = orders => orders?.data?.map(order => order.courses?.filter(course => course._id !== order._id)?.flatMap(course => course._id));
 
   const getCourseIds = orders => {
     if (!orders?.data) {
@@ -49,42 +47,49 @@ const Course = ({ courseId }) => {
     navigate("/cart");
   };
 
-  console.log("THE COURSE ID", courseId);
-  console.log("MY COURSE ID", courseIds);
-
   if (course) {
     return (
-      <div className="course">
-        <div className="course__image">
-          <img src={course.previewUrl} alt="course image" className="course__image--img" />
-        </div>
-        <div className="course__details">
-          <p className="course__details--title">{course.name}</p>
-          <p className="course__details--description">{course.description}</p>
-          <div className="course__timing">
-            <p className="course__timing-element course__timing--hours">
-              {course.duration} total hours
-            </p>
-            <p className="course__timing-element course__timing-element-divider course__timing--level">
-              {course.category}
-            </p>
+      <>
+        <div className="course">
+          <div className="course__image">
+            <img src={course.previewUrl} alt="course image" className="course__image--img" />
           </div>
-          <div className="course__actions">
-            {filteredCourseIds == null || Object.keys(filteredCourseIds)?.length === 0 ? (
-              <>
-                <button className="course__actions--button" onClick={() => handleAddToCart(course)}>Add to cart</button>
-                <button className="course__actions--button" onClick={() => navigate("/cart")}>Check Cart</button>
-              </>
-            ) : (
-              <button className="course__actions--button" onClick={() => navigate("/dashboard/video-courses")}>Watch Now</button>
-            )}
+          <div className="course__details">
+            <p className="course__details--title">{course.name}</p>
+            <p className="course__details--description">{course.description}</p>
+            <div className="course__details--ratings">
+              <p>{course.students?.length} Graduated Students</p>
+            </div>
+
+            <div className="course__timing">
+              <p className="course__timing-element course__timing--hours">
+                {course.duration} total hours
+              </p>
+              <p className="course__timing-element course__timing-element-divider course__timing--lectures">
+                {course.videos.length} lectures
+              </p>
+              <p className="course__timing-element course__timing-element-divider course__timing--level">
+                {course.category}
+              </p>
+            </div>
+            <div className="course__actions">
+              {filteredCourseIds == null || Object.keys(filteredCourseIds)?.length === 0 ? (
+                <>
+                  <button className="course__actions--button" onClick={() => handleAddToCart(course)}>Add to cart</button>
+                  <button className="course__actions--button" onClick={() => navigate("/cart")}>Check Cart</button>
+                </>
+              ) : (
+                <button className="course__actions--button" onClick={() => navigate("/dashboard/video-courses")}>Watch Now</button>
+              )}
+            </div>
           </div>
+          <p className="course__price">
+            <span className="course-symbol">$</span>
+            <span className="course-price">{course.price}</span>
+          </p>
         </div>
-        <p className="course__price">
-          <span className="symbol">$</span>
-          <span className="price">{course.price}</span>
-        </p>
-      </div>
+
+      </>
     )
   } else {
     return (
