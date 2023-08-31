@@ -11,7 +11,6 @@ import ForgotPassword from './redux/features/auth/ForgotPassword'
 import Prefetch from './redux/features/auth/Prefetch'
 // import EmailVerification from './redux/features/auth/EmailVerfication'
 import Cart from './redux/features/cart/Cart'
-import VideoPlayer from './pages/VideoPlayerPage'
 import PaymentSuccessfulPage from './pages/PaymentSuccessfulPage'
 import Layout from './components/Layout'
 import PersistLogin from './redux/features/auth/PersistLogin'
@@ -20,9 +19,24 @@ import RequireAuth from './redux/features/auth/RequireAuth'
 import { selectCurrentToken } from './redux/features/auth/authSlice'
 import CoursesList from './redux/features/course/CoursesList'
 import CookieConsentComponent from './components/CookieConsent'
+import VideoPlayerFn from './pages/Video'
+import { ToastNotification } from './components/Toast'
+import useAuth from './hooks/useAuth'
+import AdminHomePage from './pages/admin/AdminHomePage'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import NewCourseForm from './redux/features/course/admin/NewCourseForm'
+import AdminCourseList from './redux/features/course/admin/AdminCourseList'
+import EditCourse from './redux/features/course/admin/EditCourse'
+import AdminHeader from './components/admin/AdminHeader'
+import EditUser from './redux/features/users/EditUser'
+import UsersList from './redux/features/users/UserList'
+import NewUserForm from './redux/features/users/NewUserForm'
+import OrdersList from './redux/features/order/OrdersList'
 
 
 function App() {
+  const { isAdmin } = useAuth();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -39,16 +53,39 @@ function App() {
     }
   }, [isLoggedIn]);
 
+  const acceptCookies = () => {
+    document.cookie = "cookieConsent=true; max-age=31536000; path=/";
+  };
+
+  // Check if cookieConsent is set to true
+  // If so we can hide the cookie consent banner
+  const cookieConsent = document.cookie.split(';').some((item) => item.trim().startsWith('cookieConsent='));
+
   return (
     <>
-      <CookieConsentComponent />
+      {isAuthenticated && !isAdmin ? <Header /> : null}
+      {isAuthenticated && isAdmin ? <AdminHeader /> : <></>}
+      {!isAuthenticated ? <Header /> : null}
+
+      {cookieConsent ? null : <CookieConsentComponent
+        cookieName="cookieConsent"
+        location="none"
+        buttonText="Accept Cookies"
+        overlay
+        overlayClasses="overlayclass"
+        handleCookieAccept={acceptCookies}
+      />}
+      <ToastNotification />
       <div id="wrapper" className='wrapper bg-ash'>
         <Routes>
           <Route element={<Prefetch />}>
 
             <Route path="/" element={<Layout />}>
 
-              <Route index element={<Homepage />} />
+              {!isAuthenticated
+                ? <Route path="/" element={<Homepage />} />
+                : <Route path="/" element={<Navigate replace to="/dashboard" />} />
+              }
 
               <Route path="/eldt-courses" element={<CoursesList />} />
 
@@ -76,7 +113,10 @@ function App() {
 
                 <Route element={<RequireAuth />}>
 
+                  {/* User Routes */}
                   <Route path="/dashboard" element={<Homepage />} />
+
+                  <Route path="/video-courses" element={<VideoPlayerFn />} />
 
                   <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
 
@@ -84,9 +124,34 @@ function App() {
 
                   <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
 
-                  <Route path="/dashboard/video-courses" element={<VideoPlayer />} />
+                  <Route path="/dashboard/video-courses" element={<VideoPlayerFn />} />
 
-                  <Route path="*" element={<RequireAuth />} />
+                  <Route path="*" element={<PageNotFound />} />
+
+                  {/* Admin Routes */}
+                  {isAdmin && <Route path="/dashboard/admin">
+                    {<Route index element={<AdminHomePage />} />}
+
+                    {<Route path="courses">
+                      {<Route element={<AdminCourseList />} />}
+                      {<Route path="new-course" element={<NewCourseForm />} />}
+                      {<Route path="edit-course/:id" element={<EditCourse />} />}
+                    </Route>}
+
+
+                    {<Route path="users">
+                      {<Route element={<UsersList />} />}
+                      {<Route path="new-user" element={<NewUserForm />} />}
+                      {<Route path="edit-user/:id" element={<EditUser />} />}
+                    </Route>}
+
+                    {<Route path="orders">
+                      {<Route element={<OrdersList />} />}
+                    </Route>}
+
+
+                    {<Route path="*" element={<PageNotFound />} />}
+                  </Route>}
 
                 </Route>
 
@@ -97,11 +162,12 @@ function App() {
 
           </Route>
 
-          <Route path="*" element={<PageNotFound message={"Page not found"} />} />
+          <Route path="*" element={<PageNotFound />} />
 
         </Routes>
 
       </div >
+      <Footer />
     </>
   )
 }
