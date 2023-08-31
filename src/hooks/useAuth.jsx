@@ -13,17 +13,17 @@ const useAuth = () => {
 
     const decodedToken = jwtDecode(token);
 
-    const { firstName, lastName, email, roles } = decodedToken.UserInfo;
+    const { firstName, lastName, email, role } = decodedToken.UserInfo;
 
-    isAdmin = roles.includes("admin" || "Admin");
+    isAdmin = role == "admin" || "Admin";
 
     if (isAdmin) {
       status = "Admin";
     }
 
-    return { firstName, lastName, roles, email, status, isAdmin };
+    return { firstName, lastName, role, email, status, isAdmin };
   }
-  return { firstName: "", lastName: "", roles: [], email: "", status, isAdmin };
+  return { firstName: "", lastName: "", role: "", email: "", status, isAdmin };
 };
 
 export default useAuth;
