@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 
-import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
 import PayButton from "../../../components/PayButton";
 
 import {
@@ -49,7 +47,6 @@ const Cart = () => {
         <meta property="og:title" content="CDL City Driving School App" />
         <link rel="canonical" href="https://www.eldttrucking.com" />
       </Helmet>
-      <Header />
       <div className="cart-container">
         <h2>Shopping Cart</h2>
         {cart.cartItems.length === 0 ? (
@@ -153,7 +150,6 @@ const Cart = () => {
           </div>
         )}
       </div>
-      <Footer />
     </>
   );
 };
