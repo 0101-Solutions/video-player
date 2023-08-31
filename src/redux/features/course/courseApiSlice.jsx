@@ -25,21 +25,13 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
             { type: 'Courses', id: 'LIST' },
             ...result.ids.map((id) => ({ type: 'Courses', id }))
           ]
-        } else return [{ type: 'Course', id: 'LIST' }]
+        } else return [{ type: 'Courses', id: 'LIST' }]
       }
     }),
     getMyCourses: builder.query({
       query: () => "/courses/my-course",
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
-      },
-      providesTags: (result) => {
-        if (result?.ids) {
-          return [
-            { type: 'Course', id: 'LIST' },
-            ...result.ids.map((id) => ({ type: 'Course', id }))
-          ]
-        } else return [{ type: 'Course', id: 'LIST' }]
       }
     }),
     addNewCourse: builder.mutation({
@@ -51,7 +43,7 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
         }
       }),
       invalidatesTags: [
-        { type: 'Course', id: "LIST" },
+        { type: 'Courses', id: "LIST" },
       ]
     }),
     updateCourse: builder.mutation({
@@ -63,7 +55,7 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
         }
       }),
       invalidatesTags: (result, error, arg) => [
-        { type: 'Course', id: arg.id },
+        { type: 'Courses', id: arg.id },
       ]
     }),
     deleteCourse: builder.mutation({
@@ -72,7 +64,7 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
       invalidatesTags: (result, error, arg) => [
-        { type: 'Course', id: arg.id },
+        { type: 'Courses', id: arg.id },
       ]
     }),
     completeCourse: builder.mutation({
