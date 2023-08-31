@@ -1,9 +1,6 @@
 import { useRef } from 'react'
 import ReactPlayer from 'react-player'
-// import { useSelector } from 'react-redux';
-// import { useParams } from 'react-router-dom';
 
-import Header from '../components/Header';
 import CourseDetails from '../redux/features/course/CourseDetails';
 import { useCompleteCourseMutation, useGetMyCoursesQuery } from '../redux/features/course/courseApiSlice';
 import Loader from '../components/Loader';
@@ -45,8 +42,6 @@ const VideoPlayer = () => {
   if (isSuccessCourses || isSuccess) {
     content = (
       <>
-        <Header />
-
         {(isError || isErrorCourses) && showErrorToast(error?.message) || showErrorToast(errorCourses?.message)}
 
         {/* Map through each course */}
@@ -74,7 +69,6 @@ const VideoPlayer = () => {
     )
   } else {
     <>
-      <Header />
       {(isError || isErrorCourses) && showErrorToast(error?.message) || showErrorToast(errorCourses?.message)}
       <div className='player-wrapper'>
         <p>The course you are looking for does not exist please try again later.</p>
