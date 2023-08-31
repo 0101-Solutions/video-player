@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
 import { ToastNotification, showErrorToast, showSuccessToast } from '../../../components/Toast';
 import trailer from "../../../assets/Images/trailer.jpg";
 
@@ -66,7 +64,7 @@ const Register = () => {
       // TO-DO: Check if user has verified their email.
       // If so, redirect to the dashboard else redirect to the email verification page.
 
-      navigate('/dashboard')
+      navigate('/dashboard/eldt-courses')
     } catch (err) {
       if (!err.status) {
         setErrorMsg('No Server Response');
@@ -90,7 +88,6 @@ const Register = () => {
         <link rel="canonical" href="https://eldttrucking.com" />
       </Helmet>
       <div className="register">
-        <Header />
 
         {isSuccess && showSuccessToast('Login Successful')}
 
@@ -268,7 +265,6 @@ const Register = () => {
           </form>
         </div>
         <ToastNotification />
-        <Footer />
       </div>
     </>
   );
