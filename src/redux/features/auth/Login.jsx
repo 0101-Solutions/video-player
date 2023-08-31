@@ -65,7 +65,7 @@ const Login = () => {
       if (role === 'admin') {
         navigate('/dashboard/admin')
       } else {
-        navigate('/eldt-courses')
+        navigate('/dashboard/eldt-courses')
       }
     } catch (err) {
       if (!err.status) {
