@@ -1,7 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-
-import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
 import { ToastNotification, showErrorToast, showSuccessToast } from '../../../components/Toast';
 
 import usePersist from '../../../hooks/usePersist'
@@ -13,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Helmet } from 'react-helmet-async';
+import jwtDecode from 'jwt-decode';
 
 const Login = () => {
   const [errMsg, setErrorMsg] = useState('')
@@ -60,7 +58,15 @@ const Login = () => {
 
       dispatch(setCredentials({ accessToken }))
 
-      navigate('/eldt-courses')
+      const decodedToken = jwtDecode(accessToken)
+
+      const { role } = decodedToken.UserInfo
+
+      if (role === 'admin') {
+        navigate('/dashboard/admin')
+      } else {
+        navigate('/eldt-courses')
+      }
     } catch (err) {
       if (!err.status) {
         setErrorMsg('No Server Response');
@@ -84,8 +90,6 @@ const Login = () => {
         <link rel="canonical" href="https://www.eldttrucking.com" />
       </Helmet>
       <div className="login">
-        <Header />
-
         {isSuccess && showSuccessToast('Login Successful')}
 
         {errMsg && showErrorToast(errMsg)}
@@ -145,7 +149,6 @@ const Login = () => {
           <button className="form__button">Login</button>
         </form>
         <ToastNotification />
-        <Footer />
       </div>
     </>
   );
