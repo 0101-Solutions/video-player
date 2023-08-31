@@ -10,7 +10,6 @@ import { selectAllOrders } from "../../redux/features/order/ordersApiSlice";
 
 
 const AdminHomePage = () => {
-  // console.log(selectAllOrders(store.getState()))
   const courses = useSelector(state => selectAllCourses(state, store.getState()));
   const users = useSelector(state => selectAllUsers(state, store.getState()));
   const orders = useSelector(state => selectAllOrders(state, store.getState()));
@@ -50,7 +49,7 @@ const AdminHomePage = () => {
               <div className="card-body">
                 <br />
                 <h1 className="card-title" style={{ "fontSize": "4rem" }}>Our Users</h1>
-                <p className="card-text">Total Users: ({users.length})</p>
+                <p className="card-text">Total Users: ({users?.length})</p>
                 <Link to="/dashboard/admin/users" className="btn btn-primary"><h2>View Our Users</h2></Link>
               </div>
             </div>
@@ -60,7 +59,7 @@ const AdminHomePage = () => {
               <div className="card-body">
                 <br />
                 <h1 className="card-title" style={{ "fontSize": "4rem" }}>Our Orders</h1>
-                <p className="card-text">Total Orders: ({orders.length})</p>
+                <p className="card-text">Total Orders: ({orders?.length})</p>
                 <Link to="/dashboard/admin/orders" className="btn btn-primary"><h2>View Our Orders</h2></Link>
               </div>
             </div>
