@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { selectCourseById } from './coursesApiSlice'
+import { selectCourseById } from '../courseApiSlice'
 
 import EditCourseForm from './EditCourseForm'
 
-import Loader from '../../../components/Loader'
+import Loader from '../../../../components/Loader'
 
 const EditCourse = () => {
 
