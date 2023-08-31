@@ -79,7 +79,7 @@ const Course = ({ courseId }) => {
                   <button className="course__actions--button" onClick={() => navigate("/cart")}>Check Cart</button>
                 </>
               ) : (
-                <button className="course__actions--button" onClick={() => navigate("/dashboard/video-courses")}>Watch Now</button>
+                <button className="course__actions--button" onClick={() => navigate(`/dashboard/video-courses/${courseId}`)}>Watch Now</button>
               )}
             </div>
           </div>
