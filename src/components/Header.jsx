@@ -8,7 +8,7 @@ import { selectCurrentToken } from "../redux/features/auth/authSlice";
 import { useSendLogoutMutation } from "../redux/features/auth/authApiSlice";
 
 import Loader from "./Loader";
-import { ToastNotification, showErrorToast, showSuccessToast } from "../components/Toast";
+import { showErrorToast, showSuccessToast } from "../components/Toast";
 
 
 const Header = () => {
@@ -146,7 +146,6 @@ const Header = () => {
           {icon ? <GiHamburgerMenu /> : <AiOutlineClose />}
         </button>
       </div>
-      <ToastNotification />
     </header>
   );
 };
