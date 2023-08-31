@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials } from '../features/auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3080/api/v1",
+  baseUrl: "https://cdlcity-api.azurewebsites.net/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
 
@@ -48,6 +48,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['User', 'Course', 'Order', 'Orders'],
+  tagTypes: ['User', 'Courses', 'MyOrder', 'Orders'],
   endpoints: () => ({})
 });
