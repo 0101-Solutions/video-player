@@ -114,8 +114,7 @@ body {
 .about__text--description {
   text-align: justify;
   line-height: 1.7;
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: larger;
   margin-bottom: 1rem;
 }
 
@@ -610,6 +609,7 @@ body {
   letter-spacing: 1px;
   margin-bottom: 2rem;
   font-size: larger;
+  padding: 20px;
 }
 
 .hero-section__textbox--link {
@@ -1595,6 +1595,10 @@ body {
   border-radius: 3px;
 }
 
+.section-title {
+  font-size: large;
+}
+
 .cookie-consent button:last-child {
   background-color: #333;
   color: #fff;
@@ -1608,6 +1612,7 @@ body {
 
 .items-container {
   display: grid;
+  font-size: larger;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
