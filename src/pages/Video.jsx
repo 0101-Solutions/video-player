@@ -45,7 +45,8 @@ const VideoPlayerFn = () => {
       // Redirect to the first video when reaching the end
       localStorage.removeItem('activeVideoIndex');
       showSuccessToast(`You have completed the course successfully`)
-      // Send API to update student to graduatedStudents 
+      // Send API to update student to graduatedStudents
+      completeCourse(course.id)
 
       navigate("/dashboard/completed-course")
 
