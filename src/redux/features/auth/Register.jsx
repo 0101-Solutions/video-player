@@ -36,9 +36,10 @@ const Register = () => {
   }, []);
 
   const showPassword = () => {
-    var x = document.getElementById("password") || document.getElementById("confirm-password");
+    var x = document.getElementById("password");
 
     var y = document.getElementById("togglePassword");
+
 
     if (x.type === "password") {
       x.type = "text";
@@ -46,10 +47,10 @@ const Register = () => {
       x.type = "password";
     }
 
-    if (y.innerHTML === "Show Password") {
-      y.innerHTML = "Hide Password";
+    if (y.innerHTML === "Show") {
+      y.innerHTML = "Hide";
     } else {
-      y.innerHTML = "Show Password";
+      y.innerHTML = "Show";
     }
   }
 
@@ -59,6 +60,7 @@ const Register = () => {
 
       dispatch(setCredentials({ accessToken }))
 
+      // Check if dispatch is successful
       showSuccessToast(`Registration Successful ${data.firstName}. Welcome to CDL City Driving School`)
 
       navigate('/dashboard/eldt-courses')
@@ -231,14 +233,6 @@ const Register = () => {
               {errors.confirmPassword && (
                 <p className="error-message">{errors.confirmPassword.message}</p>
               )}
-              <button
-                type="button"
-                id="togglePassword"
-                className="show-password-button"
-                onClick={showPassword}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </button>
             </div>
             <div className="form__group form__group--remember">
               <label htmlFor="persist" className="form__group--label">
