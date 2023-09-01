@@ -41,7 +41,7 @@ const VideoPlayerFn = () => {
   const handleVideoEnded = () => {
     const nextIndex = activeVideoIndex + 1;
 
-    if (nextIndex >= course.videos.length) {
+    if (nextIndex >= course.videos?.length) {
       // Redirect to the first video when reaching the end
       localStorage.removeItem('activeVideoIndex');
       showSuccessToast(`You have completed the course successfully`)
@@ -51,8 +51,8 @@ const VideoPlayerFn = () => {
       navigate("/dashboard/completed-course")
 
     } else {
-      showSuccessToast(`Video ${course.videos[activeVideoIndex].title} watched successfully`)
-      course.videos.map((video) => {
+      showSuccessToast(`Video ${course?.videos[activeVideoIndex].title} watched successfully`)
+      course?.videos?.map((video) => {
         return { ...video, watched: true };
       });
 
@@ -66,7 +66,7 @@ const VideoPlayerFn = () => {
       <div className="container mb-5">
         <div className="main-video-container">
           <ReactPlayer
-            url={course.videos[activeVideoIndex].url}
+            url={course?.videos[activeVideoIndex].url}
             ref={playerRef}
             controls
             autoPlay
@@ -74,18 +74,18 @@ const VideoPlayerFn = () => {
             className="main-video"
             onEnded={handleVideoEnded}
           />
-          <h3 className="main-vid-title">Currently Watching: {course.videos[activeVideoIndex].title}</h3>
+          <h3 className="main-vid-title">Currently Watching: {course?.videos[activeVideoIndex].title}</h3>
         </div>
 
         <div className="video-list-container">
-          {course.videos.map((video, index) => (
+          {course?.videos.map((video, index) => (
             <div
               key={index}
               className={`list ${activeVideoIndex === index ? 'active' : ''}`}
               onClick={() => handleVideoClick(index)}
             >
-              <img src={course.previewUrl} className="list-video" />
-              <h3 className="list-title">{video.title} {video.watched ? '✔️ Watched' : ''}</h3>
+              <img src={course?.previewUrl} className="list-video" />
+              <h3 className="list-title">{video?.title} {video?.watched ? '✔️ Watched' : ''}</h3>
             </div>
           ))}
         </div>
