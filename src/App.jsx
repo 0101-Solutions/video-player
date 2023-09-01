@@ -36,7 +36,6 @@ import EditOrder from './redux/features/order/EditOrder'
 import CompleteCoursePage from './pages/CompleteCoursePage'
 import About from './components/About'
 
-
 function App() {
   const { isAdmin } = useAuth();
 
