@@ -83,10 +83,14 @@ const Course = ({ courseId }) => {
               )}
             </div>
           </div>
-          <p className="course__price">
-            <span className="course-symbol">$</span>
-            <span className="course-price">{course.price}</span>
-          </p>
+          {filteredCourseIds == null || Object.keys(filteredCourseIds)?.length === 0 ? (
+            <p className="course__price">
+              <span className="course-symbol">$</span>
+              <span className="course-price">{course.price}</span>
+            </p>
+          ) : (
+            <></>
+          )}
         </div>
 
       </>
