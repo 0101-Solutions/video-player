@@ -7,7 +7,7 @@ import Loader from "../../../components/Loader";
 import { showErrorToast, showSuccessToast } from "../../../components/Toast";
 
 const EditOrderForm = ({ order }) => {
-  const { register, handleSubmit, setValue } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: order
   });
 
