@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player'
 import CourseDetails from '../redux/features/course/CourseDetails';
 import { useCompleteCourseMutation, useGetMyCoursesQuery } from '../redux/features/course/courseApiSlice';
 import Loader from '../components/Loader';
-import { ToastNotification, showErrorToast, showSuccessToast } from "../components/Toast";
+import { showErrorToast, showSuccessToast } from "../components/Toast";
 
 const VideoPlayer = () => {
   const {
@@ -64,7 +64,6 @@ const VideoPlayer = () => {
             <CourseDetails name={course?.course?.name} description={course?.course?.description} img={course?.course?.previewUrl} />
           </>
         ))}
-        <ToastNotification />
       </>
     )
   } else {
@@ -72,7 +71,6 @@ const VideoPlayer = () => {
       {(isError || isErrorCourses) && showErrorToast(error?.message) || showErrorToast(errorCourses?.message)}
       <div className='player-wrapper'>
         <p>The course you are looking for does not exist please try again later.</p>
-        <ToastNotification />
       </div>
     </>
   }
