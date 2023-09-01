@@ -1051,7 +1051,6 @@ body {
 .footer {
   padding: 3rem 5rem;
   background-color: var(--color-primary);
-  /* Occupy the full length */
   width: 100%;
 }
 
