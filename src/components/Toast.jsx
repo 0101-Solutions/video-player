@@ -10,6 +10,7 @@ const ToastNotification = () => {
       key={useId()}
       ref={toastRef}
       position="top-center"
+      style={{ top: "80px" }}
       autoClose={3000}
       closeOnClick
       pauseOnHover
