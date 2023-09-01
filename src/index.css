@@ -525,11 +525,15 @@ body {
   }
 
   .header__nav-list {
-    flex-direction: column;
-    justify-content: space-around;
-    min-height: 80vh;
-    background-color: #eee;
-    padding: 0 4rem;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 30vh;
+  background-color: #eee;
+  padding: 1rem 4rem;
+  }
+
+  .header__nav-list a {
+    margin-bottom: 0.5rem;
   }
 
   .header__nav {
