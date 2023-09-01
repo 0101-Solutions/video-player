@@ -15,9 +15,11 @@ const PayButton = ({ cartItems }) => {
 
   const handleCheckout = () => {
     showSuccessToast("You will be redirected to the payment page shortly.")
-    setTimeout(() => {
-      clearCart()
-    }, 900);
+
+    const cart = cartItems;
+
+    dispatch(clearCart())
+
     axios
       .post(`${url}/stripe/checkout-session`, {
         cartItems,
