@@ -56,13 +56,13 @@ const Login = () => {
       const { accessToken } = await login({ email: data.email, password: data.password }).unwrap()
 
       dispatch(setCredentials({ accessToken }))
+      showSuccessToast('Login Successful. Welcome!')
 
       const decodedToken = jwtDecode(accessToken)
 
       const { role } = decodedToken.UserInfo
 
       if (role === 'admin') {
-        showSuccessToast('Login Successful')
         navigate('/dashboard/admin')
       } else {
         navigate('/dashboard/eldt-courses')
