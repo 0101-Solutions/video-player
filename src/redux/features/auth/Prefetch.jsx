@@ -14,14 +14,14 @@ const Prefetch = () => {
   useEffect(() => {
     // Manually subscribing to the endpoints
     const courses = store.dispatch(coursesApiSlice.endpoints.getCourses.initiate());
-    // const myOrders = store.dispatch(ordersApiSlice.endpoints.getMyOrders.initiate());
+    const myOrders = store.dispatch(ordersApiSlice.endpoints.getMyOrders.initiate());
     const orders = store.dispatch(ordersApiSlice.endpoints.getOrders.initiate())
     const users = store.dispatch(usersApiSlice.endpoints.getUsers.initiate())
 
     return () => {
       // Manually unsubscribing from the endpoints. Clean up
       courses.unsubscribe();
-      // myOrders.unsubscribe();
+      myOrders.unsubscribe();
       orders.unsubscribe();
       users.unsubscribe();
     }
