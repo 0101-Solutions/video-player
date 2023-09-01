@@ -19,13 +19,12 @@ const User = ({ userId }) => {
     return (
       <tbody>
         <tr>
-          <td scope="row">
+          <td scope="row" className="td-dropdown-container">
             <div className="dropdown">
-              <span className="dropdown-trigger"><i className="fas fa-ellipsis-v"></i></span>
+              <span><i className="fas fa-ellipsis-v"></i></span>
               <div className="dropdown-content">
                 <button className="dropdown-item" onClick={() => navigate(`/dashboard/admin/users/${userId}/view`)}><i className="fas fa-regular fa-user"></i>&nbsp;View User</button>
-                {isAdmin && <button className="dropdown-item" onClick={() => navigate(`/dashboard/admin/edit-user/${userId}`)}><i className="fas fa-cogs text-dark-pastel-green"></i>&nbsp;Edit User</button>}
-              </div>
+                {isAdmin && <button className="dropdown-item" onClick={() => navigate(`/dashboard/admin/edit-user/${userId}`)}><i className="fas fa-cogs text-dark-pastel-green"></i>&nbsp;Edit User</button>}              </div>
             </div>
           </td>
           <td className="text-capitalize">{user.firstName}{" "}{user.lastName}</td>
