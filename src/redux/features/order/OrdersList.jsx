@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Order from './Order';
 
@@ -37,7 +37,7 @@ const OrdersList = () => {
           <meta name="description" content={`Orders List - ELDT Trucking School App`} />
           <meta name="keyword" content="ELDT Trucking School" />
           <meta property="og:title" content="ELDT Trucking School App" />
-          <link rel="canonical" href="https://www.eldttrucking.com" />
+          <link rel="canonical" href="https://www.eldttrucking.com/dashboard/admin/orders" />
         </Helmet>
         <div className="dashboard-content-one">
 
@@ -45,9 +45,6 @@ const OrdersList = () => {
 
           <div className="card height-auto mb-5 border-0 responsive">
             <div className="card-body">
-              <div className="text-center mb-4">
-                <Link to="/dashboard/admin/new-user" className="text-center btn btn-primary">Add User</Link>
-              </div>
               <div className="heading-layout1">
                 <div className="item-title">
                   <a onClick={() => navigate(-1)}><i className="fa-solid fa-arrow-left arrow"></i></a>
