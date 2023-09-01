@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { showErrorToast, showSuccessToast } from '../../../components/Toast';
 import trailer from "../../../assets/Images/trailer.jpg";
@@ -16,8 +16,6 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
 const Register = () => {
-  const [errMsg, setErrorMsg] = useState('')
-
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -28,7 +26,7 @@ const Register = () => {
 
   const password = watch("password");
 
-  const [signup, { isSuccess }] = useRegisterMutation();
+  const [signup] = useRegisterMutation();
 
   const [persist, setPersist] = usePersist();
 
@@ -61,19 +59,18 @@ const Register = () => {
 
       dispatch(setCredentials({ accessToken }))
 
-      // TO-DO: Check if user has verified their email.
-      // If so, redirect to the dashboard else redirect to the email verification page.
+      showSuccessToast(`Registration Successful ${data.firstName}. Welcome to CDL City Driving School`)
 
       navigate('/dashboard/eldt-courses')
     } catch (err) {
       if (!err.status) {
-        setErrorMsg('No Server Response');
+        showErrorToast('No Server Response');
       } else if (err.status === 400) {
-        setErrorMsg('Missing Email or Password');
+        showErrorToast('Missing Email or Password');
       } else if (err.status === 401) {
-        setErrorMsg(err.data.message);
+        showErrorToast(err.data.message);
       } else {
-        setErrorMsg(err.data?.message);
+        showErrorToast(err.data?.message);
       }
     }
   };
@@ -88,11 +85,6 @@ const Register = () => {
         <link rel="canonical" href="https://eldttrucking.com" />
       </Helmet>
       <div className="register">
-
-        {isSuccess && showSuccessToast('Login Successful')}
-
-        {errMsg && showErrorToast(errMsg)}
-
         <div className="sign-up-form__container">
           <div className="sign-up__left">
             <h3 className="sign-up__left--title">
