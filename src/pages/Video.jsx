@@ -49,11 +49,9 @@ const VideoPlayerFn = () => {
 
       navigate("/dashboard/completed-course")
 
-      // window.location.reload();
     } else {
+      showSuccessToast(`Video ${course.videos[activeVideoIndex].title} watched successfully`)
       course.videos.map((video) => {
-        showSuccessToast(`Video ${video.title} watched successfully`)
-
         return { ...video, watched: true };
       });
 
@@ -64,7 +62,7 @@ const VideoPlayerFn = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container mb-5">
         <div className="main-video-container">
           <ReactPlayer
             url={course.videos[activeVideoIndex].url}
