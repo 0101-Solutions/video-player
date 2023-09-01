@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { ToastNotification, showErrorToast, showSuccessToast } from '../../../components/Toast';
+import { showErrorToast, showSuccessToast } from '../../../components/Toast';
 import trailer from "../../../assets/Images/trailer.jpg";
 
 import usePersist from '../../../hooks/usePersist'
@@ -264,7 +264,6 @@ const Register = () => {
             <button className="form__button">Register</button>
           </form>
         </div>
-        <ToastNotification />
       </div>
     </>
   );
