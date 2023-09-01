@@ -18,9 +18,7 @@ import RequireAuth from './redux/features/auth/RequireAuth'
 
 import { selectCurrentToken } from './redux/features/auth/authSlice'
 import CoursesList from './redux/features/course/CoursesList'
-import CookieConsentComponent from './components/CookieConsent'
 import VideoPlayerFn from './pages/Video'
-import { ToastNotification } from './components/Toast'
 import useAuth from './hooks/useAuth'
 import AdminHomePage from './pages/admin/AdminHomePage'
 import Header from './components/Header'
@@ -36,6 +34,7 @@ import OrdersList from './redux/features/order/OrdersList'
 import NewOrderForm from './redux/features/order/NewOrderForm'
 import EditOrder from './redux/features/order/EditOrder'
 import CompleteCoursePage from './pages/CompleteCoursePage'
+import About from './components/About'
 
 
 function App() {
@@ -56,29 +55,12 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  const acceptCookies = () => {
-    document.cookie = "cookieConsent=true; max-age=31536000; path=/";
-  };
-
-  // Check if cookieConsent is set to true
-  // If so we can hide the cookie consent banner
-  const cookieConsent = document.cookie.split(';').some((item) => item.trim().startsWith('cookieConsent='));
-
   return (
     <>
       {isAuthenticated && !isAdmin ? <Header /> : null}
       {isAuthenticated && isAdmin ? <AdminHeader /> : <></>}
       {!isAuthenticated ? <Header /> : null}
 
-      {cookieConsent ? null : <CookieConsentComponent
-        cookieName="cookieConsent"
-        location="none"
-        buttonText="Accept Cookies"
-        overlay
-        overlayClasses="overlayclass"
-        handleCookieAccept={acceptCookies}
-      />}
-      <ToastNotification />
       <div id="wrapper" className='wrapper bg-ash'>
         <Routes>
           <Route element={<Prefetch />}>
@@ -91,6 +73,8 @@ function App() {
               }
 
               <Route path="/eldt-courses" element={<CoursesList />} />
+
+              <Route path="/about" element={<About />} />
 
               {!isAuthenticated
                 ? <Route path="/login" element={<Login />} />
