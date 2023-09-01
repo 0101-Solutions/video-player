@@ -11,20 +11,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer__top">
         <p className="footer__logo-text">CDL City Driving</p>
-        <div className="footer__social">
-          <a href="" className="footer__social">
-            <AiOutlineTwitter />
-          </a>
-          <a href="" className="footer__social">
-            <AiFillInstagram />
-          </a>
-          <a href="" className="footer__social">
-            <AiFillLinkedin />
-          </a>
-          <a href="" className="footer__social">
-            <AiFillFacebook />
-          </a>
-        </div>
+
       </div>
 
       <div className="footer__links">
@@ -84,6 +71,20 @@ const Footer = () => {
             </li>
           </ol>
         </div>
+      </div>
+      <div className="footer__social">
+        <a href="" className="footer__social">
+          <AiOutlineTwitter />
+        </a>
+        <a href="" className="footer__social">
+          <AiFillInstagram />
+        </a>
+        <a href="" className="footer__social">
+          <AiFillLinkedin />
+        </a>
+        <a href="" className="footer__social">
+          <AiFillFacebook />
+        </a>
       </div>
       <p className="footer__copyright">
         &copy; 2023 CDL City Driving School. All rights reserved
