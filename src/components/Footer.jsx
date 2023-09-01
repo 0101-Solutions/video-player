@@ -1,9 +1,3 @@
-import {
-  AiOutlineTwitter,
-  AiFillInstagram,
-  AiFillLinkedin,
-  AiFillFacebook,
-} from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -34,57 +28,14 @@ const Footer = () => {
           <ol className="footer__nav-list">
             <li className="footer__nav-item">
               {" "}
-              <Link>About Us</Link>{" "}
+              <Link to="/about">About Us</Link>{" "}
             </li>
             <li className="footer__nav-item">
               {" "}
-              <Link>Blog</Link>{" "}
-            </li>
-            <li className="footer__nav-item">
-              {" "}
-              <Link>Partnerships</Link>{" "}
-            </li>
-            <li className="footer__nav-item">
-              {" "}
-              <Link>Careers</Link>{" "}
+              <Link to="/eldt-courses">ELDT Courses</Link>{" "}
             </li>
           </ol>
         </div>
-        <div className="footer__links-group">
-          <p className="footer__links-title">Our Social Media</p>
-          <ol className="footer__nav-list">
-            <li className="footer__nav-item">
-              {" "}
-              <Link>Facebook</Link>{" "}
-            </li>
-            <li className="footer__nav-item">
-              {" "}
-              <Link>Twitter</Link>{" "}
-            </li>
-            <li className="footer__nav-item">
-              {" "}
-              <Link>Instagram</Link>{" "}
-            </li>
-            <li className="footer__nav-item">
-              {" "}
-              <Link>Linkedin</Link>{" "}
-            </li>
-          </ol>
-        </div>
-      </div>
-      <div className="footer__social">
-        <a href="" className="footer__social">
-          <AiOutlineTwitter />
-        </a>
-        <a href="" className="footer__social">
-          <AiFillInstagram />
-        </a>
-        <a href="" className="footer__social">
-          <AiFillLinkedin />
-        </a>
-        <a href="" className="footer__social">
-          <AiFillFacebook />
-        </a>
       </div>
       <p className="footer__copyright">
         &copy; 2023 CDL City Driving School. All rights reserved
