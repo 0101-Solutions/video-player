@@ -1,7 +1,7 @@
 import { useGetCoursesQuery } from "../../features/course/courseApiSlice";
 
 import Loader from '../../../components/Loader';
-import { ToastNotification, showErrorToast } from '../../../components/Toast';
+import { showErrorToast } from '../../../components/Toast';
 import Course from './Course';
 import Title from "../../../components/Title";
 
@@ -41,7 +41,6 @@ const CoursesList = () => {
     content = (
       <>
         {showErrorToast(error.message)}
-        <ToastNotification />
       </>
     )
   }
