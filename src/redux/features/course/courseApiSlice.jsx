@@ -68,8 +68,8 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
       ]
     }),
     completeCourse: builder.mutation({
-      query: () => ({
-        url: `/courses/complete`,
+      query: (id) => ({
+        url: `/courses/complete/${id}`,
         method: 'PATCH',
       }),
     })
