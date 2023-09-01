@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { ToastNotification, showErrorToast, showSuccessToast } from '../../../components/Toast';
+import { useEffect, useRef } from 'react'
+import { showErrorToast, showSuccessToast } from '../../../components/Toast';
 
 import usePersist from '../../../hooks/usePersist'
 
@@ -13,7 +13,6 @@ import { Helmet } from 'react-helmet-async';
 import jwtDecode from 'jwt-decode';
 
 const Login = () => {
-  const [errMsg, setErrorMsg] = useState('')
 
   const navigate = useNavigate();
 
@@ -23,7 +22,7 @@ const Login = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const [login, { isSuccess }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
   const [persist, setPersist] = usePersist();
 
@@ -63,19 +62,20 @@ const Login = () => {
       const { role } = decodedToken.UserInfo
 
       if (role === 'admin') {
+        showSuccessToast('Login Successful')
         navigate('/dashboard/admin')
       } else {
         navigate('/dashboard/eldt-courses')
       }
     } catch (err) {
       if (!err.status) {
-        setErrorMsg('No Server Response');
+        showErrorToast('No Server Response');
       } else if (err.status === 400) {
-        setErrorMsg('Missing Email or Password');
+        showErrorToast('Missing Email or Password');
       } else if (err.status === 401) {
-        setErrorMsg(err.data.message);
+        showErrorToast(err.data.message);
       } else {
-        setErrorMsg(err.data?.message);
+        showErrorToast(err.data?.message);
       }
     }
   };
@@ -90,10 +90,6 @@ const Login = () => {
         <link rel="canonical" href="https://www.eldttrucking.com" />
       </Helmet>
       <div className="login">
-        {isSuccess && showSuccessToast('Login Successful')}
-
-        {errMsg && showErrorToast(errMsg)}
-
         <form onSubmit={handleSubmit(onSubmit)} className="login-form">
           <h3 className="sign-up__form--title center">Login</h3>
           <div className="form__group">
@@ -148,7 +144,6 @@ const Login = () => {
           </div>
           <button className="form__button">Login</button>
         </form>
-        <ToastNotification />
       </div>
     </>
   );
