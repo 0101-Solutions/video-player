@@ -6,7 +6,7 @@ const Homepage = () => {
 
   return (
     <>
-      <Hero description={description} subTitle="What is ELDT?" mainTitle="CDL City Driving School" />
+      <Hero description={description} subTitle="What is ELDT?" mainTitle="Entry Level Driving Class A" />
       <About />
     </>
   )
