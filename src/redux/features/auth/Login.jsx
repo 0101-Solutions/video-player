@@ -7,7 +7,7 @@ import { useLoginMutation } from './authApiSlice'
 import { setCredentials } from './authSlice'
 
 import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Helmet } from 'react-helmet-async';
 import jwtDecode from 'jwt-decode';
@@ -143,6 +143,9 @@ const Login = () => {
             />
           </div>
           <button className="form__button">Login</button>
+          <p className="text-right" style={{ "marginTop": "-3rem" }}>
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </p>
         </form>
       </div>
     </>
