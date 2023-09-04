@@ -35,6 +35,8 @@ import NewOrderForm from './redux/features/order/NewOrderForm'
 import EditOrder from './redux/features/order/EditOrder'
 import CompleteCoursePage from './pages/CompleteCoursePage'
 import About from './components/About'
+import SetNewPassword from './redux/features/auth/SetNewPassword'
+import VerifyEmail from './pages/VerifyEmail'
 
 function App() {
   const { isAdmin } = useAuth();
@@ -74,6 +76,10 @@ function App() {
               <Route path="/eldt-courses" element={<CoursesList />} />
 
               <Route path="/about" element={<About />} />
+
+              <Route path="/set-new-password/:token" element={<SetNewPassword />} />
+
+              <Route path="/verify-email/:token" element={<VerifyEmail />} />
 
               {!isAuthenticated
                 ? <Route path="/login" element={<Login />} />
