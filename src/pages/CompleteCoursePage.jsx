@@ -23,7 +23,7 @@ const CompleteCoursePage = () => {
   const handleDownloadCertificate = async () => {
     try {
       // Load the existing PDF file (replace with your PDF file path or URL)
-      const existingPdfBytes = await fetch('http://localhost:5173/PDF/certificate.pdf').then((res) => res.arrayBuffer());
+      const existingPdfBytes = await fetch('https://www.eldttrucking.com/PDF/certificate.pdf').then((res) => res.arrayBuffer());
 
       // Create a new PDF document
       const pdfDoc = await PDFDocument.load(existingPdfBytes);
