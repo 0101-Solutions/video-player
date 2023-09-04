@@ -9,7 +9,7 @@ import { useRegisterMutation } from './authApiSlice'
 import { setCredentials } from './authSlice'
 
 import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Helmet } from 'react-helmet-async';
 import PhoneInput from "react-phone-number-input";
@@ -37,9 +37,7 @@ const Register = () => {
 
   const showPassword = () => {
     var x = document.getElementById("password");
-
     var y = document.getElementById("togglePassword");
-
 
     if (x.type === "password") {
       x.type = "text";
@@ -60,7 +58,6 @@ const Register = () => {
 
       dispatch(setCredentials({ accessToken }))
 
-      // Check if dispatch is successful
       showSuccessToast(`Registration Successful ${data.firstName}. Welcome to CDL City Driving School`)
 
       navigate('/dashboard/eldt-courses')
@@ -70,9 +67,9 @@ const Register = () => {
       } else if (err.status === 400) {
         showErrorToast('Missing Email or Password');
       } else if (err.status === 401) {
-        showErrorToast(err.data.message);
+        showErrorToast(err.message);
       } else {
-        showErrorToast(err.data?.message);
+        showErrorToast(err.message);
       }
     }
   };
@@ -246,8 +243,10 @@ const Register = () => {
                 onChange={(e) => setPersist(e.target.checked)}
               />
             </div>
-
             <button className="form__button">Register</button>
+            <p className="text-right" style={{ "marginTop": "-3rem" }}>
+              <Link to="/login">Existing User?</Link>
+            </p>
           </form>
         </div>
       </div>
