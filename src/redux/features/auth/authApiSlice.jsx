@@ -69,9 +69,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { email }
       }),
     }),
+    setNewPassword: builder.mutation({
+      query: ({ data, token }) => ({
+        url: `/auth/update-password/${token}`,
+        method: 'POST',
+        body: { ...data }
+      }),
+    }),
   })
-})
-
+});
 
 export const {
   useRegisterMutation,
@@ -79,7 +85,8 @@ export const {
   useMyProfileQuery,
   useSendLogoutMutation,
   useRefreshMutation,
-  useForgotPasswordMutation
+  useForgotPasswordMutation,
+  useSetNewPasswordMutation
 } = authApiSlice;
 
 // Selectors
