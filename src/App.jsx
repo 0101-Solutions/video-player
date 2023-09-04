@@ -113,6 +113,7 @@ function App() {
 
               {isAuthenticated && status === "active" ? (
                 <Route element={<PersistLogin />}>
+
                   <Route element={<RequireAuth />}>
 
                     {/* User Routes */}
