@@ -26,7 +26,7 @@ const Register = () => {
 
   const password = watch("password");
 
-  const [signup] = useRegisterMutation();
+  const [signup, { isError, error }] = useRegisterMutation();
 
   const [persist, setPersist] = usePersist();
 
@@ -73,6 +73,10 @@ const Register = () => {
       }
     }
   };
+
+  if (isError) {
+    showErrorToast(error.data.message);
+  }
 
   return (
     <>
