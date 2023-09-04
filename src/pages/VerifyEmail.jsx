@@ -30,7 +30,7 @@ const VerifyEmail = () => {
 
 
   content = (
-    <div className="payment-successful" style={{ "height": "43.2vh" }}>
+    <div className="payment-successful" style={{ "height": "45.2vh" }}>
       <h2>Email Verified Successfully</h2>
       <ConfettiExplosion style={{ "left": "50%", "translateX": "-50%" }} force={0.8} duration={5000} particleCount={1000} width={2000} />
       <p>
