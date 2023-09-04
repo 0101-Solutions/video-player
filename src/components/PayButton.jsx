@@ -1,14 +1,16 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import propTypes from 'prop-types';
 
 import { selectCurrentToken } from "../redux/features/auth/authSlice";
 import { clearCart } from '../redux/features/cart/cartSlice';
 import { showErrorToast, showSuccessToast } from './Toast';
 
-const url = "https://cdlcity-api.azurewebsites.net/api/v1"
+const url = "http://localhost:3080/api/v1"
 
 const PayButton = ({ cartItems }) => {
+  const dispatch = useDispatch();
+
   const isLoggedIn = useSelector((state) => selectCurrentToken(state));
 
   let content;
@@ -22,7 +24,7 @@ const PayButton = ({ cartItems }) => {
 
     axios
       .post(`${url}/stripe/checkout-session`, {
-        cartItems,
+        cartItems: cart,
         isLoggedIn,
         withCredentials: true
       })
