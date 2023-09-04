@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 
-import { clearCart } from "../redux/features/cart/cartSlice";
 import ConfettiExplosion from "react-confetti-explosion";
 
 const PaymentSuccessful = () => {
   setTimeout(() => {
-    clearCart();
     window.location.href = "/dashboard/eldt-courses";
   }, 5000);
 
