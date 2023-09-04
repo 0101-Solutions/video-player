@@ -76,6 +76,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...data }
       }),
     }),
+    verifyEmail: builder.mutation({
+      query: ({ token }) => ({
+        url: `/auth/verify-email/${token}`,
+        method: 'GET',
+      }),
+    }),
   })
 });
 
@@ -86,7 +92,8 @@ export const {
   useSendLogoutMutation,
   useRefreshMutation,
   useForgotPasswordMutation,
-  useSetNewPasswordMutation
+  useSetNewPasswordMutation,
+  useVerifyEmailMutation
 } = authApiSlice;
 
 // Selectors
