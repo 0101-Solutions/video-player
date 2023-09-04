@@ -2,37 +2,47 @@
 
 // import ConfettiExplosion from "react-confetti-explosion";
 // import jsPDF from "jspdf";
-import { PDFDocument, rgb } from "pdf-lib";
+import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { useState } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
 
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../redux/features/auth/authSlice";
+import jwtDecode from "jwt-decode";
 const CompleteCoursePage = () => {
 
+  const token = useSelector((state) => selectCurrentToken(state))
 
+
+  const decodedToken = jwtDecode(token);
+
+  const { firstName, lastName } = decodedToken.UserInfo;
 
   const [modifiedPdfBytes, setModifiedPdfBytes] = useState(null);
 
   const handleDownloadCertificate = async () => {
     try {
       // Load the existing PDF file (replace with your PDF file path or URL)
-      const existingPdfBytes = await fetch('https://www.eldttrucking.com/PDF/certificate.pdf').then((res) => res.arrayBuffer());
+      const existingPdfBytes = await fetch('http://localhost:5173/PDF/certificate.pdf').then((res) => res.arrayBuffer());
 
       // Create a new PDF document
       const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
       // Create a new page with default dimensions
       const newPage = pdfDoc.getPages()[0];
-      const { height } = newPage.getSize();
+      const { width, height } = newPage.getSize();
 
       // Add "Hello, World!" text to the new page
-      // const helveticaFont = await pdfDoc.embedFont(PDFDocument.StandardFonts.Helvetica);
-      newPage.drawText('Hello, World!', {
-        x: 250,
-        y: height / 2,
+      const helveticaFont = await pdfDoc.embedFont(StandardFonts.CourierBoldOblique);
+      newPage.drawText(firstName + " " + lastName, {
+        x: width / 2 + 20,
+        y: height / 2 - 70,
         size: 30,
-        // font: helveticaFont,
+        font: helveticaFont,
         color: rgb(0, 0, 0), // Black color
         textAlign: 'center',
+        direction: 'ltr',
+        rotate: degrees(-270),
       });
 
       // Serialize the modified PDF document to bytes
@@ -52,7 +62,9 @@ const CompleteCoursePage = () => {
       <p>
         You will receive your certificate in your email shortly.
       </p>
-      <button onClick={handleDownloadCertificate} className="form__button ">Process Certificate</button>
+      {!modifiedPdfBytes && (
+        <button onClick={handleDownloadCertificate} className="form__button ">Process Certificate</button>
+      )}
       {modifiedPdfBytes && (
         <div className="mb-5 mt-5 text-center">
           <a
