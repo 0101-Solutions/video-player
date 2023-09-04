@@ -1,16 +1,33 @@
 
 import { useForm } from "react-hook-form";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useSetNewPasswordMutation } from "./authApiSlice";
+import { showErrorToast, showSuccessToast } from "../../../components/Toast";
 
 const SetNewPassword = () => {
-  const {
-    register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = () => {
-    // the data object contains the user input information which will be used for validation and login
-    // console.log(data);
+  const [setNewPassword, { isSuccess, isError, error }] = useSetNewPasswordMutation();
+  const { token } = useParams();
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    setNewPassword({ data, token })
   };
 
-  return (
+  let content;
+
+  if (isSuccess) {
+    showSuccessToast("Password reset successful. Try loggin in with the newly created password");
+    navigate("/login")
+  }
+
+  if (isError) {
+    showErrorToast(error.data.message);
+  }
+
+  content = (
     <div className="login">
       <form onSubmit={handleSubmit(onSubmit)} className="login-form">
         <h3 className="sign-up__form--title center">Set New Password</h3>
@@ -21,6 +38,7 @@ const SetNewPassword = () => {
           <input
             type="password"
             id="password"
+            required
             className="form__group--input"
             placeholder="Your Password"
             {...register("password")}
@@ -31,16 +49,23 @@ const SetNewPassword = () => {
             Confirm Password
           </label>
           <input
-            type="confirmPassword"
+            type="password"
             id="confirmPassword"
+            required
             className="form__group--input"
             placeholder="Confirm Your Password"
             {...register("confirmPassword")}
           />
         </div>
         <button className="form__button">Set New Password</button>
+        <p className="text-right" style={{ "marginTop": "-3rem" }}>
+          <Link to="/login">Remembered Password?</Link>
+        </p>
       </form>
     </div>
   );
+
+  return content;
 };
+
 export default SetNewPassword;
