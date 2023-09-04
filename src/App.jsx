@@ -37,9 +37,10 @@ import CompleteCoursePage from './pages/CompleteCoursePage'
 import About from './components/About'
 import SetNewPassword from './redux/features/auth/SetNewPassword'
 import VerifyEmail from './pages/VerifyEmail'
+import ActivateAccount from './pages/ActivateAccount'
 
 function App() {
-  const { isAdmin } = useAuth();
+  const { isAdmin, status } = useAuth();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -55,6 +56,9 @@ function App() {
       setIsAuthenticated(false)
     }
   }, [isLoggedIn]);
+
+  console.log(status)
+
 
   return (
     <>
@@ -101,53 +105,65 @@ function App() {
                 : <Route path="/signup" element={<Navigate replace to="/dashboard" />} />
               }
 
-              <Route element={<PersistLogin />}>
-                <Route element={<RequireAuth />}>
+              {status === "inactive" && isAuthenticated ? (
+                <Route path="/activate-account" element={<ActivateAccount />} />
+              ) : (
+                <></>
+              )}
 
-                  {/* User Routes */}
-                  <Route path="/dashboard" element={<Homepage />} />
+              {isAuthenticated && status === "active" ? (
+                <Route element={<PersistLogin />}>
+                  <Route element={<RequireAuth />}>
 
-                  <Route path="/video-courses" element={<VideoPlayerFn />} />
+                    {/* User Routes */}
+                    <Route path="/dashboard" element={<Homepage />} />
 
-                  <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
+                    <Route path="/activate-account/" element={<ActivateAccount />} />
 
-                  <Route path="/cart" element={<Cart />} />
+                    <Route path="/video-courses" element={<VideoPlayerFn />} />
 
-                  <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
+                    <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
 
-                  <Route path="/dashboard/video-courses/:id" element={<VideoPlayerFn />} />
+                    <Route path="/cart" element={<Cart />} />
 
-                  <Route path="/dashboard/completed-course" element={<CompleteCoursePage />} />
+                    <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
 
-                  <Route path="*" element={<PageNotFound />} />
+                    <Route path="/dashboard/video-courses/:id" element={<VideoPlayerFn />} />
 
-                  {/* Admin Routes */}
-                  {isAdmin && <Route path="/dashboard/admin">
-                    {<Route index element={<AdminHomePage />} />}
+                    <Route path="/dashboard/completed-course" element={<CompleteCoursePage />} />
 
-                    {<Route path="new-course" element={<NewCourseForm />} />}
+                    <Route path="*" element={<PageNotFound />} />
 
-                    {<Route path="courses" element={<AdminCourseList />} />}
+                    {/* Admin Routes */}
+                    {isAdmin && <Route path="/dashboard/admin">
+                      {<Route index element={<AdminHomePage />} />}
 
-                    {<Route path="edit-course/:id" element={<EditCourse />} />}
+                      {<Route path="new-course" element={<NewCourseForm />} />}
 
-                    {<Route path="users" element={<UsersList />} />}
+                      {<Route path="courses" element={<AdminCourseList />} />}
 
-                    {<Route path="new-user" element={<NewUserForm />} />}
+                      {<Route path="edit-course/:id" element={<EditCourse />} />}
 
-                    {<Route path="edit-user/:id" element={<EditUser />} />}
+                      {<Route path="users" element={<UsersList />} />}
 
-                    {<Route path="orders" element={<OrdersList />} />}
+                      {<Route path="new-user" element={<NewUserForm />} />}
 
-                    {<Route path="new-order" element={<NewOrderForm />} />}
+                      {<Route path="edit-user/:id" element={<EditUser />} />}
 
-                    {<Route path="edit-order/:id" element={<EditOrder />} />}
+                      {<Route path="orders" element={<OrdersList />} />}
 
-                    {<Route path="*" element={<PageNotFound />} />}
-                  </Route>}
+                      {<Route path="new-order" element={<NewOrderForm />} />}
 
+                      {<Route path="edit-order/:id" element={<EditOrder />} />}
+
+                      {<Route path="*" element={<PageNotFound />} />}
+                    </Route>}
+
+                  </Route>
                 </Route>
-              </Route>
+              ) : (
+                <></>
+              )}
 
             </Route>
 
