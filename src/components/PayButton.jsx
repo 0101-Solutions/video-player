@@ -6,7 +6,7 @@ import { selectCurrentToken } from "../redux/features/auth/authSlice";
 import { clearCart } from '../redux/features/cart/cartSlice';
 import { showErrorToast, showSuccessToast } from './Toast';
 
-const url = "http://localhost:3080/api/v1"
+const url = "https://cdlcity-api.azurewebsites.net/api/v1"
 
 const PayButton = ({ cartItems }) => {
   const dispatch = useDispatch();
