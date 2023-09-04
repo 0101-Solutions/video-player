@@ -60,13 +60,19 @@ const Login = () => {
 
       const decodedToken = jwtDecode(accessToken)
 
-      const { role } = decodedToken.UserInfo
+      const { role, status } = decodedToken.UserInfo
 
       if (role === 'admin') {
         navigate('/dashboard/admin')
+      }
+
+      if (status === "inactive") {
+        navigate("/activate-account")
       } else {
         navigate('/dashboard/eldt-courses')
       }
+
+
     } catch (err) {
       if (!err.status) {
         showErrorToast('No Server Response');
