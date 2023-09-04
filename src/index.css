@@ -440,6 +440,8 @@ body {
 
 .header_text {
   margin-left: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
 .header_contacts {
@@ -531,6 +533,9 @@ body {
 
   .header__nav-portion {
     align-items: flex-start;
+  }
+  .header__nav-portion h2 {
+    margin-top: 1.2rem;
   }
 
   .header__nav-list {
@@ -1661,6 +1666,12 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.item:hover {
+  background-color: var(--color-primary-light);
+  transform: translateY(-5px);
 }
 
 .section-title {
