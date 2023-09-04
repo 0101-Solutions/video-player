@@ -5,7 +5,7 @@ const NotFoundPage = () => {
   const { isAdmin } = useAuth();
 
   return (
-    <div className="not-found-container">
+    <div className="not-found-container" style={{ "height": "53vh" }}>
       <div className="animated-text">
         <h1 className="not-found-title">404</h1>
         <p className="not-found-message">
