@@ -118,6 +118,15 @@ body {
   margin-bottom: 1rem;
 }
 
+.learn-more {
+  font-size: larger;
+  margin-right: 3rem;
+}
+
+.ul-title {
+  color: var(--color-primary);
+}
+
 .about__cta,
 .about__cta:visited {
   text-decoration: none;
