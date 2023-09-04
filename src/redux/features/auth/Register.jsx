@@ -26,7 +26,7 @@ const Register = () => {
 
   const password = watch("password");
 
-  const [signup, { isError, error }] = useRegisterMutation();
+  const [signup] = useRegisterMutation();
 
   const [persist, setPersist] = usePersist();
 
@@ -67,16 +67,12 @@ const Register = () => {
       } else if (err.status === 400) {
         showErrorToast('Missing Email or Password');
       } else if (err.status === 401) {
-        showErrorToast(err.message);
+        showErrorToast(err.data.message);
       } else {
-        showErrorToast(err.message);
+        showErrorToast(err.data.message);
       }
     }
   };
-
-  if (isError) {
-    showErrorToast(error.data.message);
-  }
 
   return (
     <>
