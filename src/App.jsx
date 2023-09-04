@@ -119,8 +119,6 @@ function App() {
                     {/* User Routes */}
                     <Route path="/dashboard" element={<Homepage />} />
 
-                    <Route path="/activate-account" element={<ActivateAccount />} />
-
                     <Route path="/video-courses" element={<VideoPlayerFn />} />
 
                     <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
