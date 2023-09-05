@@ -43,22 +43,25 @@ function App() {
   const { isAdmin, status } = useAuth();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isActive, setIsActive] = useState(false)
 
   const isLoggedIn = useSelector((state) => selectCurrentToken(state))
 
   useEffect(() => {
     if (isLoggedIn) {
       setIsAuthenticated(true)
+      if (status === "inactive") {
+        setIsActive(false)
+      } else if (status === "active") {
+        setIsActive(true)
+      }
     }
 
     if (!isLoggedIn) {
       redirect('/login')
       setIsAuthenticated(false)
     }
-  }, [isLoggedIn]);
-
-  console.log(status)
-
+  }, [isLoggedIn, status]);
 
   return (
     <>
@@ -111,58 +114,75 @@ function App() {
                 <></>
               )}
 
-              {isAuthenticated && status === "active" ? (
-                <Route element={<PersistLogin />}>
+              <Route element={<PersistLogin />}>
 
-                  <Route element={<RequireAuth />}>
+                <Route element={<RequireAuth />}>
 
-                    {/* User Routes */}
-                    <Route path="/dashboard" element={<Homepage />} />
+                  {/* User Routes */}
+                  {isActive
+                    ? <Route path="/dashboard" element={<Homepage />} />
+                    : <Route path="/dashboard" element={<Navigate replace to="/activate-account" />} />
+                  }
 
-                    <Route path="/video-courses" element={<VideoPlayerFn />} />
+                  {isActive
+                    ? <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
+                    : <Route path="/dashboard/eldt-courses" element={<Navigate replace to="/activate-account" />} />
+                  }
 
-                    <Route path="/dashboard/eldt-courses" element={<CoursesList />} />
+                  {isActive
+                    ? <Route path="/video-courses" element={<VideoPlayerFn />} />
+                    : <Route path="/video-courses" element={<Navigate replace to="/activate-account" />} />
+                  }
 
-                    <Route path="/cart" element={<Cart />} />
+                  {isActive
+                    ? <Route path="/cart" element={<Cart />} />
+                    : <Route path="/cart" element={<Navigate replace to="/activate-account" />} />
+                  }
 
-                    <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
+                  {isActive
+                    ? <Route path="/checkout/success" element={<PaymentSuccessfulPage />} />
+                    : <Route path="/checkout/success" element={<Navigate replace to="/activate-account" />} />
+                  }
 
-                    <Route path="/dashboard/video-courses/:id" element={<VideoPlayerFn />} />
+                  {isActive
+                    ? <Route path="/dashboard/video-courses/:id" element={<VideoPlayerFn />} />
+                    : <Route path="/dashboard/video-courses/:id" element={<Navigate replace to="/activate-account" />} />
+                  }
 
-                    <Route path="/dashboard/completed-course" element={<CompleteCoursePage />} />
+                  {isActive
+                    ? <Route path="/dashboard/completed-course" element={<CompleteCoursePage />} />
+                    : <Route path="/dashboard/completed-course" element={<Navigate replace to="/activate-account" />} />
+                  }
 
-                    <Route path="*" element={<PageNotFound />} />
+                  <Route path="*" element={<PageNotFound />} />
 
-                    {/* Admin Routes */}
-                    {isAdmin && <Route path="/dashboard/admin">
-                      {<Route index element={<AdminHomePage />} />}
+                  {/* Admin Routes */}
+                  {isAdmin && isActive && <Route path="/dashboard/admin">
+                    {<Route index element={<AdminHomePage />} />}
 
-                      {<Route path="new-course" element={<NewCourseForm />} />}
+                    {<Route path="new-course" element={<NewCourseForm />} />}
 
-                      {<Route path="courses" element={<AdminCourseList />} />}
+                    {<Route path="courses" element={<AdminCourseList />} />}
 
-                      {<Route path="edit-course/:id" element={<EditCourse />} />}
+                    {<Route path="edit-course/:id" element={<EditCourse />} />}
 
-                      {<Route path="users" element={<UsersList />} />}
+                    {<Route path="users" element={<UsersList />} />}
 
-                      {<Route path="new-user" element={<NewUserForm />} />}
+                    {<Route path="new-user" element={<NewUserForm />} />}
 
-                      {<Route path="edit-user/:id" element={<EditUser />} />}
+                    {<Route path="edit-user/:id" element={<EditUser />} />}
 
-                      {<Route path="orders" element={<OrdersList />} />}
+                    {<Route path="orders" element={<OrdersList />} />}
 
-                      {<Route path="new-order" element={<NewOrderForm />} />}
+                    {<Route path="new-order" element={<NewOrderForm />} />}
 
-                      {<Route path="edit-order/:id" element={<EditOrder />} />}
+                    {<Route path="edit-order/:id" element={<EditOrder />} />}
 
-                      {<Route path="*" element={<PageNotFound />} />}
-                    </Route>}
+                    {<Route path="*" element={<PageNotFound />} />}
+                  </Route>}
 
-                  </Route>
                 </Route>
-              ) : (
-                <></>
-              )}
+              </Route>
 
             </Route>
 
