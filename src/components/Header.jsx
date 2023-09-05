@@ -70,7 +70,7 @@ const Header = () => {
       {isError && showErrorToast(error?.data?.message)}
 
       <div className="header__nav-portion">
-        <h2 className="header_text">ELDT Training</h2>
+        <h2 className="header_text"><Link to="/" style={{ "textDecoration": "none" }}>ELDT Training</Link></h2>
         <nav className="header__nav" ref={navRef}>
           <ol className="header__nav-list">
             {!isAuthenticated ? (
