@@ -11,7 +11,7 @@ const Order = ({ orderId }) => {
 
   const { firstName, lastName, phoneNumber } = order.user;
 
-  const date = new Date(order.createdAt).toISOString().split('T')[0];
+  const date = new Date(order.createdAt).toISOString().split('.')[0];
 
   const getCourseNames = order => order.courses.map(item => item.course.name).join(', ');
 
