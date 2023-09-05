@@ -68,6 +68,8 @@ const Register = () => {
         showErrorToast('Missing Email or Password');
       } else if (err.status === 401) {
         showErrorToast(err.data.message);
+      } else if (err.data.error.code === 11000) {
+        showErrorToast('Email already exists. Please use another email.');
       } else {
         showErrorToast(err.data.message);
       }
@@ -81,7 +83,7 @@ const Register = () => {
         <meta name="description" content="Login - CDL City Driving School App" />
         <meta name="keyword" content="CDL City Driving School" />
         <meta property="og:title" content="CDL City Driving School App" />
-        <link rel="canonical" href="https://eldttrucking.com" />
+        <link rel="canonical" href="https://www.eldttrucking.com" />
       </Helmet>
       <div className="register">
         <div className="sign-up-form__container">
