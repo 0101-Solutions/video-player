@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSetNewPasswordMutation } from "./authApiSlice";
