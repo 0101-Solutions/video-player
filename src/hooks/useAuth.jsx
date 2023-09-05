@@ -7,19 +7,15 @@ const useAuth = () => {
 
   let isAdmin = false;
 
-
   if (token) {
 
     const decodedToken = jwtDecode(token);
 
     const { firstName, lastName, email, role, status } = decodedToken.UserInfo;
 
-    console.log(status)
-
     if (role === "admin") {
       isAdmin = true;
     }
-
 
     return { firstName, lastName, role, email, status, isAdmin };
   }
