@@ -62,13 +62,15 @@ const Login = () => {
 
       const { role, status } = decodedToken.UserInfo
 
-      if (role === 'admin') {
+      if (role === "admin" && status === "active") {
         navigate('/dashboard/admin')
       }
 
       if (status === "inactive") {
         navigate("/activate-account")
-      } else {
+      }
+
+      if (role === "user" && status === "active") {
         navigate('/dashboard/eldt-courses')
       }
 
