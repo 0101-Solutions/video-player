@@ -68,7 +68,7 @@ const Register = () => {
         showErrorToast('Missing Email or Password');
       } else if (err.status === 401) {
         showErrorToast(err.data.message);
-      } else if (err.data.error.code === 11000) {
+      } else if (err.status === 409) {
         showErrorToast('Email already exists. Please use another email.');
       } else {
         showErrorToast(err.data.message);
