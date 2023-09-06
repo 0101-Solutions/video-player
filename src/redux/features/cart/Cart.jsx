@@ -38,6 +38,18 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
+  // Loop through the cart items and get the description trim it at the first period and add ellipsis
+  // If no period, just return the first 50 characters
+  const description = cart.cartItems.map((item) => {
+    const description = item.description;
+    const period = description.indexOf(".");
+    if (period > 0) {
+      return description.slice(0, period) + "...";
+    } else {
+      return description.slice(0, 50) + "...";
+    }
+  });
+
   return (
     <>
       <Helmet>
@@ -87,7 +99,7 @@ const Cart = () => {
                       <img src={cartItem.previewUrl} alt={cartItem.name} />
                       <div>
                         <h3>{cartItem.name}</h3>
-                        <p>{cartItem.description}</p>
+                        <p>{description}</p>
                         <button onClick={() => handleRemoveFromCart(cartItem)}>
                           Remove
                         </button>
