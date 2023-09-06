@@ -107,7 +107,7 @@ const Hero = ({ subTitle, mainTitle, description }) => {
           }
         </div>
         {!isAuthenticated ? (
-          <Link to="/register" className="hero-section__textbox--link">
+          <Link to="/signup" className="hero-section__textbox--link">
             register
           </Link>
         ) : (
