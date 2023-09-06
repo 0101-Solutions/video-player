@@ -38,6 +38,7 @@ import About from './components/About'
 import SetNewPassword from './redux/features/auth/SetNewPassword'
 import VerifyEmail from './pages/VerifyEmail'
 import ActivateAccount from './pages/ActivateAccount'
+import ScrollToTop from 'react-scroll-to-top'
 
 function App() {
   const { isAdmin, status } = useAuth();
@@ -70,6 +71,7 @@ function App() {
       {!isAuthenticated ? <Header /> : null}
 
       <div id="wrapper" className='wrapper bg-ash'>
+        <ScrollToTop smooth style={{ "opacity": ".6" }} />
         <Routes>
           <Route element={<Prefetch />}>
 
