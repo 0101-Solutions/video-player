@@ -30,6 +30,10 @@ const Footer = () => {
           <ol className="footer__nav-list">
             <li className="footer__nav-item">
               {" "}
+              <Link to="/">Home</Link>{" "}
+            </li>
+            <li className="footer__nav-item">
+              {" "}
               <Link to="/about">About Us</Link>{" "}
             </li>
             <li className="footer__nav-item">
