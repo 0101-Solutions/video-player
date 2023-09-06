@@ -28,8 +28,7 @@ const CoursesList = () => {
       <>
         <section className="courses" id="courses">
           <Title
-            subTitle="we have a variety of courses to make you drive your dream car"
-            mainTitle="browse our courses"
+            mainTitle="ELDT Courses"
           />
           {ids.map((id) => <Course key={id} courseId={id} />)}
         </section>
