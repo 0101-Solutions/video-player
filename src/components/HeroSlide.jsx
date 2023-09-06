@@ -32,7 +32,7 @@ const HeroSlide = ({ subTitle, mainTitle, description }) => {
         <p className="hero-section__textbox--description">{description}</p>
         {/* <Link to="/">register</Link> */}
         {!isAuthenticated
-          ? <Link to="/register" className="hero-section__textbox--link">register</Link>
+          ? <Link to="/signup" className="hero-section__textbox--link">register</Link>
           : <Link to="/video-courses" className="hero-section__textbox--link">View Courses</Link>
         }
 
