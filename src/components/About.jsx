@@ -31,7 +31,6 @@ const About = () => {
     <div className="container">
       <section className="about" id="about">
         <Title
-          subTitle="learn more about who we are and what we do"
           mainTitle="About us"
         />
         <div className="about__container">
