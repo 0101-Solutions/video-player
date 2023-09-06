@@ -9,7 +9,7 @@ import { useRegisterMutation } from './authApiSlice'
 import { setCredentials } from './authSlice'
 
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Helmet } from 'react-helmet-async';
 import PhoneInput from "react-phone-number-input";
@@ -245,10 +245,12 @@ const Register = () => {
                 onChange={(e) => setPersist(e.target.checked)}
               />
             </div>
-            <button className="form__button">Register</button>
-            <p className="text-right" style={{ "marginTop": "-3rem" }}>
-              <Link to="/login">Existing User?</Link>
-            </p>
+            <div className="row">
+              <div className="col">
+                <button className="form__button">Register</button></div>
+              <div className="col">
+                <button className="opposite btn-primary btn-block p-4" onClick={() => navigate("/login")}>Existing User?</button></div>
+            </div>
           </form>
         </div>
       </div>

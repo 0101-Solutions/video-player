@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForgotPasswordMutation } from "./authApiSlice";
 import { showErrorToast, showSuccessToast } from "../../../components/Toast";
 
@@ -15,8 +15,6 @@ const ForgotPassword = () => {
   };
 
   let content;
-
-  console.log(isSuccess)
 
   if (isSuccess) {
     showSuccessToast("Password reset link sent to your email address");
@@ -43,10 +41,12 @@ const ForgotPassword = () => {
             {...register("email")}
           />
         </div>
-        <button className="form__button">Reset Password</button>
-        <p className="text-right" style={{ "marginTop": "-3rem" }}>
-          <Link to="/login">Existing User?</Link>
-        </p>
+        <div className="row">
+          <div className="col">
+            <button className="form__button">Reset Password</button></div>
+          <div className="col">
+            <button className="opposite btn-primary btn-block p-4" onClick={() => navigate("/login")}>Existing User?</button></div>
+        </div>
       </form>
     </div>
   );

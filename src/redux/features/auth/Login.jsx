@@ -7,7 +7,7 @@ import { useLoginMutation } from './authApiSlice'
 import { setCredentials } from './authSlice'
 
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Helmet } from 'react-helmet-async';
 import jwtDecode from 'jwt-decode';
@@ -150,12 +150,14 @@ const Login = () => {
               onChange={handleToggle}
             />
           </div>
-          <button className="form__button">Login</button>
-          <p className="text-right" style={{ "marginTop": "-3rem" }}>
-            <Link to="/forgot-password">Forgot Password?</Link>
-          </p>
-        </form>
-      </div>
+          <div className="row">
+            <div className="col">
+              <button className="form__button">Login</button></div>
+            <div className="col">
+              <button className="opposite btn-primary btn-block" onClick={() => navigate("/forgot-password")}>Forgot Password?</button></div>
+          </div>
+        </form >
+      </div >
     </>
   );
 };
