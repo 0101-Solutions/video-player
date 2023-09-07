@@ -38,8 +38,6 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [
         { type: 'Order', id: "LIST" },
-        { type: 'Class', id: 'LIST' },
-        { type: 'Dorm', id: 'LIST' }
       ]
     }),
     updateOrder: builder.mutation({
@@ -52,8 +50,6 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [
         { type: 'Order', id: arg.id },
-        { type: 'Class', id: 'LIST' },
-        { type: 'Dorm', id: 'LIST' }
       ]
     }),
     deleteOrder: builder.mutation({
@@ -63,8 +59,6 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [
         { type: 'Order', id: arg.id },
-        { type: 'Class', id: 'LIST' },
-        { type: 'Dorm', id: 'LIST' }
       ]
     }),
     getMyOrders: builder.query({
