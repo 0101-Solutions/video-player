@@ -70,7 +70,7 @@ const AdminHeader = () => {
       {isError && showErrorToast(error?.data?.message)}
 
       <div className="header__nav-portion">
-        <h2 className="header_text">CDL City Driving</h2>
+        <h2 className="header_text">ELDT Training</h2>
         <nav className="header__nav" ref={navRef}>
           <ol className="header__nav-list">
             <li className="header__nav-item">
@@ -81,6 +81,9 @@ const AdminHeader = () => {
             </li>
             <li className="header__nav-item">
               <Link to="/dashboard/admin/orders">Orders</Link>
+            </li>
+            <li className="header__nav-item">
+              <Link to="/dashboard/admin/schools">Schools</Link>
             </li>
             <li className="header__nav-item">
               <Link to="/dashboard/admin/users">Users</Link>
