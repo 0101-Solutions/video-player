@@ -39,6 +39,7 @@ import SetNewPassword from './redux/features/auth/SetNewPassword'
 import VerifyEmail from './pages/VerifyEmail'
 import ActivateAccount from './pages/ActivateAccount'
 import ScrollToTop from 'react-scroll-to-top'
+import SchoolList from './redux/features/school/SchoolList'
 
 function App() {
   const { isAdmin, status } = useAuth();
@@ -179,6 +180,8 @@ function App() {
                     {<Route path="new-order" element={<NewOrderForm />} />}
 
                     {<Route path="edit-order/:id" element={<EditOrder />} />}
+
+                    {<Route path="schools" element={<SchoolList />} />}
 
                     {<Route path="*" element={<PageNotFound />} />}
                   </Route>}
