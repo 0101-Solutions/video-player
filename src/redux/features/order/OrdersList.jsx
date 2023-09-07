@@ -51,7 +51,7 @@ const OrdersList = () => {
                   <h3 className="text-center edit mb-5">All Orders Data</h3>
                 </div>
               </div>
-              <div className="table table-striped">
+              <div className="table-responsive table table-striped">
                 <table className="table display data-table text-nowrap">
                   <thead>
                     <tr>
