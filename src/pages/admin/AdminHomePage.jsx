@@ -32,7 +32,7 @@ const AdminHomePage = () => {
           </div>
         </div>
       </div>
-      <div className="card-admin">
+      <div className="container card-admin">
         <div className="row text-center">
           <div className="col-md-4 mb-3 mt-2">
             <div className="card">
@@ -61,6 +61,15 @@ const AdminHomePage = () => {
                 <h1 className="card-title" style={{ "fontSize": "4rem" }}>Our Orders</h1>
                 <p className="card-text">Total Orders: ({orders?.length})</p>
                 <Link to="/dashboard/admin/orders" className="btn btn-primary"><h2>View Our Orders</h2></Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3 mt-2">
+            <div className="card">
+              <div className="card-body">
+                <br />
+                <h1 className="card-title" style={{ "fontSize": "4rem" }}>Our Schools</h1>
+                <Link to="/dashboard/admin/schools" className="btn btn-primary"><h2>Assess School</h2></Link>
               </div>
             </div>
           </div>
