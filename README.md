@@ -1,4 +1,4 @@
-# CDLCity FrontEnd App v1
+# Udemy Clone
 
 ## Requirements
 
